@@ -3,12 +3,15 @@
 import { useState, useEffect } from 'react';
 import StudentSidebar from '@/components/student/StudentSidebar';
 import ChatBot from '@/components/ChatBot';
-import { Menu } from 'lucide-react';
+import { Menu, Bell, Search } from 'lucide-react';
+import { LanguageProvider, useLanguage } from '@/context/LanguageContext';
+import LanguageToggle from '@/components/LanguageToggle';
 
-export default function StudentLayout({ children }: { children: React.ReactNode }) {
+function StudentLayoutContent({ children }: { children: React.ReactNode }) {
     const [collapsed, setCollapsed] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
     const [mounted, setMounted] = useState(false);
+    const { t } = useLanguage();
 
     useEffect(() => {
         setMounted(true);
@@ -29,8 +32,9 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
                     >
                         <Menu className="w-6 h-6" />
                     </button>
-                    <span className="font-bold text-gray-900">Student Portal</span>
+                    <span className="font-bold text-gray-900">{t('Student Portal')}</span>
                 </div>
+                <LanguageToggle />
             </div>
 
             <StudentSidebar
@@ -44,6 +48,28 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
                 className={`min-h-screen transition-all duration-300 pt-16 lg:pt-0 ${collapsed ? 'lg:ml-[72px]' : 'lg:ml-64'
                     }`}
             >
+                {/* Desktop Header */}
+                <div className="hidden lg:flex justify-between items-center px-8 py-4 bg-white border-b border-gray-100 sticky top-0 z-30">
+                    <div className="w-1/3">
+                        <div className="relative">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                            <input
+                                type="text"
+                                placeholder={t('Search') + '...'}
+                                className="w-full pl-10 pr-4 py-2 border border-gray-100 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-100 bg-gray-50 focus:bg-white transition-all"
+                            />
+                        </div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                        <button className="relative p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                            <Bell className="w-5 h-5" />
+                            <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+                        </button>
+                        <div className="h-8 w-px bg-gray-100"></div>
+                        <LanguageToggle />
+                    </div>
+                </div>
+
                 <div className="p-4 lg:p-8">
                     {children}
                 </div>
@@ -59,5 +85,13 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
                 />
             )}
         </div>
+    );
+}
+
+export default function StudentLayout({ children }: { children: React.ReactNode }) {
+    return (
+        <LanguageProvider>
+            <StudentLayoutContent>{children}</StudentLayoutContent>
+        </LanguageProvider>
     );
 }

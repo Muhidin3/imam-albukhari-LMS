@@ -7,16 +7,7 @@ import {
     Award, Bell, LogOut, ChevronLeft, ChevronRight, User, X
 } from 'lucide-react';
 import { currentStudent } from '@/lib/data';
-
-const menuItems = [
-    { label: 'Dashboard', icon: LayoutDashboard, href: '/student/dashboard' },
-    { label: 'Programs', icon: BookOpen, href: '/student/programs' },
-    { label: 'My Courses', icon: GraduationCap, href: '/student/courses' },
-    { label: 'Lesson Viewer', icon: PlayCircle, href: '/student/lessons' },
-    { label: 'Exams', icon: FileText, href: '/student/exams' },
-    { label: 'Certificates', icon: Award, href: '/student/certificates' },
-    { label: 'Announcements', icon: Bell, href: '/student/announcements' },
-];
+import { useLanguage } from '@/context/LanguageContext';
 
 interface StudentSidebarProps {
     collapsed: boolean;
@@ -27,6 +18,17 @@ interface StudentSidebarProps {
 
 export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, setMobileOpen }: StudentSidebarProps) {
     const pathname = usePathname();
+    const { t } = useLanguage();
+
+    const menuItems = [
+        { label: t('Dashboard'), icon: LayoutDashboard, href: '/student/dashboard' },
+        { label: t('Programs'), icon: BookOpen, href: '/student/programs' },
+        { label: t('My Courses'), icon: GraduationCap, href: '/student/courses' },
+        { label: t('Lesson Viewer'), icon: PlayCircle, href: '/student/lessons' },
+        { label: t('Exams'), icon: FileText, href: '/student/exams' },
+        { label: t('Certificates'), icon: Award, href: '/student/certificates' },
+        { label: t('Announcements'), icon: Bell, href: '/student/announcements' },
+    ];
 
     return (
         <aside
@@ -46,7 +48,7 @@ export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, se
                             <BookOpen className="w-4 h-4 text-white" />
                         </div>
                         <div className="lg:block">
-                            <span className="text-white font-bold text-sm block">Student Portal</span>
+                            <span className="text-white font-bold text-sm block">{t('Student Portal')}</span>
                             <span className="text-orange-400 text-[9px] -mt-0.5 block tracking-wider uppercase">Imam Al-Bukhari</span>
                         </div>
                     </div>

@@ -7,16 +7,7 @@ import {
     Award, Bell, LogOut, ChevronLeft, ChevronRight, Shield, X
 } from 'lucide-react';
 
-const menuItems = [
-    { label: 'Dashboard', icon: LayoutDashboard, href: '/admin/dashboard' },
-    { label: 'Programs', icon: BookOpen, href: '/admin/programs' },
-    { label: 'Courses & Lessons', icon: Layers, href: '/admin/courses' },
-    { label: 'Class Manager', icon: Users, href: '/admin/classes' },
-    { label: 'Students', icon: GraduationCap, href: '/admin/students' },
-    { label: 'Exam Builder', icon: FileText, href: '/admin/exams' },
-    { label: 'Certificates', icon: Award, href: '/admin/certificates' },
-    { label: 'Announcements', icon: Bell, href: '/admin/announcements' },
-];
+import { useLanguage } from '@/context/LanguageContext';
 
 interface AdminSidebarProps {
     collapsed: boolean;
@@ -27,6 +18,18 @@ interface AdminSidebarProps {
 
 export default function AdminSidebar({ collapsed, setCollapsed, mobileOpen, setMobileOpen }: AdminSidebarProps) {
     const pathname = usePathname();
+    const { t } = useLanguage();
+
+    const menuItems = [
+        { label: t('Dashboard'), icon: LayoutDashboard, href: '/admin/dashboard' },
+        { label: t('Programs'), icon: BookOpen, href: '/admin/programs' },
+        { label: t('Courses'), icon: Layers, href: '/admin/courses' },
+        { label: t('Class Manager'), icon: Users, href: '/admin/classes' },
+        { label: t('Students'), icon: GraduationCap, href: '/admin/students' },
+        { label: t('Exam Builder'), icon: FileText, href: '/admin/exams' },
+        { label: t('Certificates'), icon: Award, href: '/admin/certificates' },
+        { label: t('Announcements'), icon: Bell, href: '/admin/announcements' },
+    ];
 
     return (
         <aside
@@ -46,7 +49,7 @@ export default function AdminSidebar({ collapsed, setCollapsed, mobileOpen, setM
                             <Shield className="w-4 h-4 text-white" />
                         </div>
                         <div className="lg:block">
-                            <span className="text-white font-bold text-sm block">Admin Panel</span>
+                            <span className="text-white font-bold text-sm block">{t('Admin Panel')}</span>
                             <span className="text-orange-400 text-[9px] -mt-0.5 block tracking-wider uppercase">Imam Al-Bukhari</span>
                         </div>
                     </div>
@@ -77,7 +80,7 @@ export default function AdminSidebar({ collapsed, setCollapsed, mobileOpen, setM
             {/* Menu */}
             <nav className="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
                 <div className={`text-[10px] font-semibold text-gray-600 uppercase tracking-widest px-3 mb-3 ${collapsed ? 'hidden' : ''}`}>
-                    Management
+                    {t('Management')}
                 </div>
                 {menuItems.map((item) => {
                     const isActive = pathname === item.href || pathname.startsWith(item.href + '/');

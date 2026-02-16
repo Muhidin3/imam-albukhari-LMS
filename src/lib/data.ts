@@ -6,7 +6,9 @@ export interface Program {
   id: string;
   title: string;
   titleAr: string;
+  titleAm?: string;
   description: string;
+  descriptionAm?: string;
   duration: string;
   level: string;
   type: 'degree' | 'short-term';
@@ -21,7 +23,9 @@ export interface Course {
   id: string;
   programId: string;
   title: string;
+  titleAm?: string;
   description: string;
+  descriptionAm?: string;
   instructor: string;
   duration: string;
   modules: Module[];
@@ -135,7 +139,9 @@ export const programs: Program[] = [
     id: 'prog-1',
     title: 'Fundamentals of Islamic Studies',
     titleAr: 'أساسيات الدراسات الإسلامية',
+    titleAm: 'የእስልምና ጥናቶች መሰረታዊ',
     description: 'A comprehensive introduction to Islamic knowledge covering Aqeedah, Fiqh, Seerah, and essential Arabic. This program is designed for beginners seeking a solid foundation in Islamic studies.',
+    descriptionAm: 'የእስልምና እውቀት አጠቃላይ መግቢያ፣ አቂዳ፣ ፊቅህ፣ ሲራ እና መሰረታዊ አረብኛን ያካትታል። ይህ ፕሮግራም በእስልምና ጥናቶች ጠንካራ መሰረት ለሚፈልጉ ጀማሪዎች የተዘጋጀ ነው።',
     duration: '6 months',
     level: 'Bachelor',
     type: 'degree',
@@ -148,7 +154,9 @@ export const programs: Program[] = [
         id: 'course-1',
         programId: 'prog-1',
         title: 'Introduction to Aqeedah',
-        description: 'Understanding the fundamentals of Islamic creed and belief system based on Quran and Sunnah.',
+        titleAm: 'የአቂዳ መግቢያ',
+        description: 'Learn the core beliefs of a Muslim including Tawheed, Angels, Prophets, and the Day of Judgment.',
+        descriptionAm: 'የሙስሊም ዋና እምነቶችን ተውሂድ፣ መላእክት፣ ነቢያት እና የፍርድ ቀን ተማር።',
         instructor: 'Sheikh Ahmad Al-Farsi',
         duration: '6 weeks',
         totalLessons: 18,

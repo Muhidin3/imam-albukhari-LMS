@@ -6,10 +6,12 @@ import {
     ArrowRight, Play, Flame, Calendar, ChevronRight, CheckCircle2, BarChart3
 } from 'lucide-react';
 import { programs, announcements, examResults, studentStats, currentStudent } from '@/lib/data';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function StudentDashboard() {
     const enrolledPrograms = programs.filter(p => currentStudent.enrolledPrograms.includes(p.id));
     const recentAnnouncements = announcements.slice(0, 3);
+    const { t, language } = useLanguage();
 
     return (
         <div className="space-y-8 animate-fade-in-up">
@@ -20,7 +22,7 @@ export default function StudentDashboard() {
                 <div className="relative">
                     <div className="flex items-center gap-3 mb-2">
                         <span className="text-2xl">👋</span>
-                        <h1 className="text-2xl font-bold text-white">Assalamu Alaikum, {currentStudent.name.split(' ')[0]}!</h1>
+                        <h1 className="text-2xl font-bold text-white">{t('Welcome back')}, {currentStudent.name.split(' ')[0]}!</h1>
                     </div>
                     <p className="text-orange-100 text-sm max-w-xl">Continue your journey of seeking knowledge. You have made great progress this week!</p>
 
@@ -40,10 +42,10 @@ export default function StudentDashboard() {
             {/* Stats Cards */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 {[
-                    { label: 'Enrolled Programs', value: studentStats.enrolledPrograms, icon: BookOpen, color: 'text-orange-500', bg: 'bg-orange-50' },
-                    { label: 'Completed Lessons', value: `${studentStats.completedLessons}/${studentStats.totalLessons}`, icon: CheckCircle2, color: 'text-green-500', bg: 'bg-green-50' },
-                    { label: 'Upcoming Exams', value: studentStats.upcomingExams, icon: FileText, color: 'text-blue-500', bg: 'bg-blue-50' },
-                    { label: 'Overall Progress', value: `${studentStats.overallProgress}%`, icon: TrendingUp, color: 'text-purple-500', bg: 'bg-purple-50' },
+                    { label: t('Programs'), value: studentStats.enrolledPrograms, icon: BookOpen, color: 'text-orange-500', bg: 'bg-orange-50' },
+                    { label: t('Completed'), value: `${studentStats.completedLessons}/${studentStats.totalLessons}`, icon: CheckCircle2, color: 'text-green-500', bg: 'bg-green-50' },
+                    { label: t('Exams'), value: studentStats.upcomingExams, icon: FileText, color: 'text-blue-500', bg: 'bg-blue-50' },
+                    { label: t('Score'), value: `${studentStats.overallProgress}%`, icon: TrendingUp, color: 'text-purple-500', bg: 'bg-purple-50' },
                 ].map((stat) => (
                     <div key={stat.label} className="bg-white rounded-2xl p-5 border border-gray-100 card-hover">
                         <div className="flex items-center justify-between mb-3">
@@ -62,9 +64,9 @@ export default function StudentDashboard() {
                 {/* Programs Progress */}
                 <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-100 p-6">
                     <div className="flex items-center justify-between mb-6">
-                        <h2 className="text-lg font-bold text-gray-900">My Programs</h2>
+                        <h2 className="text-lg font-bold text-gray-900">{t('My Courses')}</h2>
                         <Link href="/student/programs" className="text-sm text-orange-500 font-medium hover:text-orange-600 flex items-center gap-1">
-                            View All <ChevronRight className="w-4 h-4" />
+                            {t('View')} <ChevronRight className="w-4 h-4" />
                         </Link>
                     </div>
                     <div className="space-y-5">
@@ -74,8 +76,8 @@ export default function StudentDashboard() {
                                 <div key={program.id} className="p-4 rounded-xl border border-gray-50 hover:border-orange-100 hover:shadow-sm transition-all">
                                     <div className="flex items-start justify-between mb-3">
                                         <div className="flex-1">
-                                            <h3 className="font-semibold text-gray-900 text-sm">{program.title}</h3>
-                                            <p className="text-xs text-gray-500 mt-1">{program.totalCourses} courses • {program.duration}</p>
+                                            <h3 className="font-semibold text-gray-900 text-sm">{language === 'am' ? program.titleAm || program.title : program.title}</h3>
+                                            <p className="text-xs text-gray-500 mt-1">{program.totalCourses} {t('Courses')} • {program.duration}</p>
                                         </div>
                                         <span className="text-sm font-bold text-orange-500">{progress}%</span>
                                     </div>
@@ -85,10 +87,10 @@ export default function StudentDashboard() {
                                     <div className="flex items-center justify-between mt-3">
                                         <span className={`text-xs px-2 py-1 rounded-full ${progress === 100 ? 'badge-success' : progress > 0 ? 'badge-warning' : 'badge-info'
                                             }`}>
-                                            {progress === 100 ? 'Completed' : progress > 0 ? 'In Progress' : 'Not Started'}
+                                            {progress === 100 ? t('Completed') : progress > 0 ? t('In Progress') : t('Not Started')}
                                         </span>
                                         <Link href="/student/courses" className="text-xs text-orange-500 font-medium flex items-center gap-1 hover:text-orange-600">
-                                            Continue <ArrowRight className="w-3 h-3" />
+                                            {t('Next')} <ArrowRight className="w-3 h-3" />
                                         </Link>
                                     </div>
                                 </div>
@@ -102,8 +104,8 @@ export default function StudentDashboard() {
                     {/* Exam Results */}
                     <div className="bg-white rounded-2xl border border-gray-100 p-6">
                         <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-lg font-bold text-gray-900">Recent Exams</h2>
-                            <Link href="/student/exams" className="text-sm text-orange-500 font-medium">View All</Link>
+                            <h2 className="text-lg font-bold text-gray-900">{t('Exams')}</h2>
+                            <Link href="/student/exams" className="text-sm text-orange-500 font-medium">{t('View')}</Link>
                         </div>
                         <div className="space-y-3">
                             {examResults.map((result) => (
@@ -128,8 +130,8 @@ export default function StudentDashboard() {
                     {/* Announcements */}
                     <div className="bg-white rounded-2xl border border-gray-100 p-6">
                         <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-lg font-bold text-gray-900">Announcements</h2>
-                            <Link href="/student/announcements" className="text-sm text-orange-500 font-medium">View All</Link>
+                            <h2 className="text-lg font-bold text-gray-900">{t('Announcements')}</h2>
+                            <Link href="/student/announcements" className="text-sm text-orange-500 font-medium">{t('View')}</Link>
                         </div>
                         <div className="space-y-3">
                             {recentAnnouncements.map((ann) => (
@@ -149,13 +151,13 @@ export default function StudentDashboard() {
 
                     {/* Quick Actions */}
                     <div className="bg-white rounded-2xl border border-gray-100 p-6">
-                        <h2 className="text-lg font-bold text-gray-900 mb-4">Quick Actions</h2>
+                        <h2 className="text-lg font-bold text-gray-900 mb-4">{t('Action')}</h2>
                         <div className="grid grid-cols-2 gap-3">
                             {[
-                                { label: 'Continue Learning', icon: Play, href: '/student/lessons', color: 'from-orange-500 to-amber-500' },
-                                { label: 'Take Exam', icon: FileText, href: '/student/exams', color: 'from-blue-500 to-cyan-500' },
-                                { label: 'Certificates', icon: Award, href: '/student/certificates', color: 'from-green-500 to-emerald-500' },
-                                { label: 'Schedule', icon: Calendar, href: '/student/announcements', color: 'from-purple-500 to-violet-500' },
+                                { label: t('Lesson'), icon: Play, href: '/student/lessons', color: 'from-orange-500 to-amber-500' },
+                                { label: t('Quiz'), icon: FileText, href: '/student/exams', color: 'from-blue-500 to-cyan-500' },
+                                { label: t('Certificates'), icon: Award, href: '/student/certificates', color: 'from-green-500 to-emerald-500' },
+                                { label: t('Announcements'), icon: Calendar, href: '/student/announcements', color: 'from-purple-500 to-violet-500' },
                             ].map((action) => (
                                 <Link key={action.label} href={action.href} className="p-4 rounded-xl border border-gray-100 hover:border-orange-100 hover:shadow-md transition-all group text-center">
                                     <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${action.color} flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform`}>

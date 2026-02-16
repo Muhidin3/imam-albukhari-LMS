@@ -6,9 +6,12 @@ import { BookOpen, Plus, Edit, Trash2, Users, Clock, Search, Eye } from 'lucide-
 import Modal from '@/components/ui/Modal';
 import { useRouter } from 'next/navigation';
 
+import { useLanguage } from '@/context/LanguageContext';
+
 export default function AdminPrograms() {
     const [showModal, setShowModal] = useState(false);
     const router = useRouter();
+    const { t, language } = useLanguage();
 
     const handleRowClick = (id: string) => {
         router.push(`/admin/programs/${id}`);
@@ -18,18 +21,18 @@ export default function AdminPrograms() {
         <div className="space-y-8 animate-fade-in-up">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900">Program Manager</h1>
-                    <p className="text-gray-500 text-sm mt-1">Create and manage educational programs</p>
+                    <h1 className="text-2xl font-bold text-gray-900">{t('Programs')}</h1>
+                    <p className="text-gray-500 text-sm mt-1">{t('Management')}</p>
                 </div>
                 <button onClick={() => setShowModal(true)} className="gradient-primary text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity flex items-center gap-2 shadow-lg shadow-orange-500/20">
-                    <Plus className="w-4 h-4" /> New Program
+                    <Plus className="w-4 h-4" /> {t('Create')}
                 </button>
             </div>
 
             {/* Search */}
             <div className="relative max-w-md">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                <input type="text" placeholder="Search programs..." className="w-full pl-11 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-700" />
+                <input type="text" placeholder={t('Search') + "..."} className="w-full pl-11 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-700" />
             </div>
 
             {/* Programs Table */}
@@ -38,13 +41,13 @@ export default function AdminPrograms() {
                     <table className="w-full text-sm">
                         <thead>
                             <tr className="text-left text-gray-500 bg-gray-50/80">
-                                <th className="px-6 py-4 font-medium">Program</th>
-                                <th className="px-6 py-4 font-medium">Level</th>
-                                <th className="px-6 py-4 font-medium">Duration</th>
-                                <th className="px-6 py-4 font-medium">Courses</th>
-                                <th className="px-6 py-4 font-medium">Students</th>
-                                <th className="px-6 py-4 font-medium">Status</th>
-                                <th className="px-6 py-4 font-medium">Actions</th>
+                                <th className="px-6 py-4 font-medium">{t('Program')}</th>
+                                <th className="px-6 py-4 font-medium">{t('Level')}</th>
+                                <th className="px-6 py-4 font-medium">{t('Duration')}</th>
+                                <th className="px-6 py-4 font-medium">{t('Courses')}</th>
+                                <th className="px-6 py-4 font-medium">{t('Students')}</th>
+                                <th className="px-6 py-4 font-medium">{t('Status')}</th>
+                                <th className="px-6 py-4 font-medium">{t('Action')}</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-50">
@@ -60,7 +63,7 @@ export default function AdminPrograms() {
                                                 <BookOpen className="w-5 h-5 text-white" />
                                             </div>
                                             <div>
-                                                <p className="font-semibold text-gray-900">{prog.title}</p>
+                                                <p className="font-semibold text-gray-900">{language === 'am' ? (prog.titleAm || prog.title) : prog.title}</p>
                                                 <p className="text-xs text-orange-400 mt-0.5">{prog.titleAr}</p>
                                             </div>
                                         </div>
