@@ -1,15 +1,11 @@
-amharic language
-side bar
-mobile friendly
+- [x] amharic language
+- [x] side bar
+- [x] mobile friendly
 in /programs no need for filters 
 
 in admin when i click on new course or new programs or all new * there is a popup which its backround is blacked and blurred and its position is on top. update that
 
 -the side bar should not cover the content of a page in medium size window make sure the page is fully visible in all pages
--in admin/programs when i click a program make me get in to the program where i can see it and i can edit it. also for admin/classes
--in admin/students group them based on their class 
--in admin/exams when i click the exam it should take me to exam page where i can see it and i can edit it.
--the announcement should be specified to a group of students based on class or based on lesson
 -also there is a big thing there are two type of students: full degree program and short term course so the dashboard and features differ for them.
 -for full degree program consider these things: apage to see past grades, basic profile change, 4 or 5 year curriculum, currently enrolled courses also make the system flexible for people who fail course and take it with other class
 -make most of things are done by class because most students are same in a class 
