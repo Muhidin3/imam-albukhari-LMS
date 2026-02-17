@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { announcements, programs, classes } from '@/lib/data';
+import { announcements, programs, classes, Announcement } from '@/lib/data';
 import { Bell, Plus, Edit, Trash2, Search, Megaphone, AlertTriangle, Info, Calendar, User, Send, Users, Layers, GraduationCap } from 'lucide-react';
 import Modal from '@/components/ui/Modal';
 

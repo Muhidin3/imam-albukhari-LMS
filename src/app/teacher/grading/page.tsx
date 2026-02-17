@@ -1,13 +1,14 @@
 'use client';
 
-import { useState, useSearchParams } from 'react';
+import { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import {
-    Users, Search, Filter, GraduationCap,
-    FileText, CheckCircle, AlertCircle,
-    ChevronRight, Save, Download, Send, FileIcon, Clock
+    Search, 
+    CheckCircle, AlertCircle,
+    Send, FileIcon, Clock
 } from 'lucide-react';
-import { classes, teachers, students, exams } from '@/lib/data';
+import { classes, teachers, students } from '@/lib/data';
+import { useSearchParams } from 'next/navigation';
 
 interface StudentSubmission {
     studentId: string;

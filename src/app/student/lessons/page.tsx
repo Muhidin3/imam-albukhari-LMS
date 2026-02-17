@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { useState } from 'react';
@@ -55,7 +56,7 @@ export default function LessonViewer() {
 
     // Get all lessons in order
     const allLessons = courseList.flatMap(c => c.allLessons);
-    const currentLesson = allLessons[currentLessonIndex];
+    const currentLesson:any = allLessons[currentLessonIndex];
     const currentCourseForLesson = currentLesson ? courseList.find(c => c.courseId === currentLesson.courseId) : null;
 
     const handlePrevious = () => {
@@ -253,7 +254,7 @@ export default function LessonViewer() {
                         <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden sticky top-6">
                             <div className="p-4 border-b border-gray-100">
                                 <h3 className="font-bold text-gray-900 text-sm">Current Semester Courses</h3>
-                                <p className="text-xs text-gray-500 mt-1">{courseList.length} courses • {allLessons.filter(l => l.completed).length}/{allLessons.length} lessons</p>
+                                <p className="text-xs text-gray-500 mt-1">{courseList.length} courses • {allLessons.filter((l:any) => l.completed).length}/{allLessons.length} lessons</p>
                             </div>
                             <div className="max-h-[60vh] overflow-y-auto">
                                 {courseList.map((course) => (
@@ -271,8 +272,8 @@ export default function LessonViewer() {
 
                                         {expandedCourse === course.courseId && (
                                             <div className="bg-gray-50/50 border-t border-gray-50">
-                                                {course.allLessons.map((lesson, idx) => {
-                                                    const globalIdx = allLessons.findIndex(l => l.id === lesson.id);
+                                                {course.allLessons.map((lesson:any,) => {
+                                                    const globalIdx = allLessons.findIndex((l:any) => l.id === lesson.id);
                                                     return (
                                                         <button
                                                             key={lesson.id}
