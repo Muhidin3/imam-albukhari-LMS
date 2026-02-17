@@ -1,11 +1,21 @@
-- [x] amharic language
-- [x] side bar
-- [x] mobile friendly
-in /programs no need for filters 
+no streak
+students
+instead of programs replace it with semester which students can see their currently taking courses with instructor name and past courses that are taken
+and each course is clickable with description 
+and for a course there are materials they may be file or video.
+in courses page just list the courses that the student is taking in this semester
 
-in admin when i click on new course or new programs or all new * there is a popup which its backround is blacked and blurred and its position is on top. update that
+in lesson viewer categorize them based on courses. that the courses are in the current semester
 
--the side bar should not cover the content of a page in medium size window make sure the page is fully visible in all pages
--also there is a big thing there are two type of students: full degree program and short term course so the dashboard and features differ for them.
--for full degree program consider these things: apage to see past grades, basic profile change, 4 or 5 year curriculum, currently enrolled courses also make the system flexible for people who fail course and take it with other class
--make most of things are done by class because most students are same in a class 
+
+
+
+ for teachers make the following changes
+ at dashboard make sure it show assigned classes , assigned courses and pending grades
+in classes teachers can have multiple classes. and when a class is clicked take the user to other page which is /teacher/classes/[classId] and show class name, course the teacher teach and students and also he can upload material to that class
+also the teacher can see uploaded assignments there, grade students there. but make other page for grading students and cheking thir uploaded assignments
+
+
+
+for admin
+add a page /admin/programs/[id]/semesters where admin can manage semesters: see past semesters ,create new semester for a programs and so on

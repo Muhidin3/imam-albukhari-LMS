@@ -17,7 +17,7 @@ export default function AdminAnnouncements() {
         }
     };
 
-    const getAudienceLabel = (ann: any) => {
+    const getAudienceLabel = (ann: Announcement) => {
         switch (ann.targetAudience) {
             case 'all': return 'All Users';
             case 'students': return 'All Students';

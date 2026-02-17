@@ -32,7 +32,7 @@ export default function AdminDashboard() {
                 ].map((stat) => (
                     <div key={stat.label} className="bg-white rounded-2xl border border-gray-100 p-5 card-hover">
                         <div className="flex items-center justify-between mb-4">
-                            <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center`}>
+                            <div className={`w-11 h-11 rounded-xl bg-linear-to-br ${stat.color} flex items-center justify-center`}>
                                 <stat.icon className="w-5 h-5 text-white" />
                             </div>
                             <span className={`flex items-center gap-1 text-xs font-medium ${stat.up ? 'text-green-500' : 'text-red-500'}`}>

@@ -106,6 +106,9 @@ export default function LoginPage() {
                             <Link href="/admin/dashboard" className="block w-full bg-[#1A1A2E] text-white py-3.5 rounded-xl text-sm font-semibold hover:bg-[#16213E] transition-colors text-center">
                                 Sign In as Admin
                             </Link>
+                            <Link href="/teacher/dashboard" className="block w-full bg-blue-600 text-white py-3.5 rounded-xl text-sm font-semibold hover:bg-blue-700 transition-colors text-center shadow-lg shadow-blue-500/20">
+                                Sign In as Teacher
+                            </Link>
                         </div>
                     </div>
 

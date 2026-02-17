@@ -1,24 +1,83 @@
 'use client';
 
 import { useState } from 'react';
-import { programs } from '@/lib/data';
+import { programs, currentStudent, transcripts } from '@/lib/data';
 import {
     Play, Pause, SkipBack, SkipForward, Volume2, Maximize2, BookOpen,
     FileText, Headphones, ChevronLeft, ChevronRight, CheckCircle2, Circle,
-    Download, Clock, List
+    Download, Clock, List, ChevronDown
 } from 'lucide-react';
 
 export default function LessonViewer() {
     const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
     const [showSidebar, setShowSidebar] = useState(true);
+    const [expandedCourse, setExpandedCourse] = useState<string | null>(null);
 
-    const allLessons = programs[0].courses[0].modules.flatMap(m =>
-        m.lessons.map(l => ({ ...l, moduleName: m.title }))
-    );
+    // Get current semester courses
+    const transcript = transcripts.find(t => t.studentId === currentStudent.id);
+    const currentSemester = transcript?.semesters.find(s => s.courses.some(c => c.status === 'in-progress'));
+    
+    // Build a map of courses with their lessons from the programs data
+    const courseModules: { [key: string]: { courseName: string; modules: any[] } } = {};
+    
+    // Get courses from programs that match current semester
+    if (currentSemester && transcript) {
+        for (const program of programs) {
+            if (program.id === transcript.programId) {
+                for (const course of program.courses) {
+                    // Check if this course is in current semester
+                    const inCurrentSemester = currentSemester.courses.some(c => 
+                        c.code.toUpperCase().includes(course.id.slice(-3).toUpperCase()) || 
+                        c.title.includes(course.title)
+                    );
+                    
+                    if (inCurrentSemester && course.modules.length > 0) {
+                        courseModules[course.id] = {
+                            courseName: course.title,
+                            modules: course.modules
+                        };
+                    }
+                }
+            }
+        }
+    }
+
+    // Build flat list of all lessons organized by course
+    const courseList = Object.entries(courseModules).map(([courseId, data]) => ({
+        courseId,
+        courseName: data.courseName,
+        modules: data.modules,
+        allLessons: data.modules.flatMap((m: { title: string; lessons: { type: string; duration: string }[] }) => 
+            m.lessons.map((l: { type: string; duration: string }) => ({ ...l, moduleName: m.title, courseId, courseName: data.courseName }))
+        )
+    }));
+
+    // Get all lessons in order
+    const allLessons = courseList.flatMap(c => c.allLessons);
     const currentLesson = allLessons[currentLessonIndex];
+    const currentCourseForLesson = currentLesson ? courseList.find(c => c.courseId === currentLesson.courseId) : null;
+
+    const handlePrevious = () => {
+        if (currentLessonIndex > 0) setCurrentLessonIndex(currentLessonIndex - 1);
+    };
+
+    const handleNext = () => {
+        if (currentLessonIndex < allLessons.length - 1) setCurrentLessonIndex(currentLessonIndex + 1);
+    };
 
     const renderContent = () => {
+        if (!currentLesson) {
+            return (
+                <div className="bg-gray-100 rounded-2xl aspect-video flex items-center justify-center">
+                    <div className="text-center">
+                        <BookOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                        <p className="text-gray-500">No lessons available</p>
+                    </div>
+                </div>
+            );
+        }
+
         switch (currentLesson.type) {
             case 'video':
                 return (
@@ -33,7 +92,7 @@ export default function LessonViewer() {
                             </div>
                         </div>
                         {/* Video Controls */}
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                        <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-4">
                             <div className="w-full h-1 bg-gray-700 rounded-full mb-3 cursor-pointer">
                                 <div className="w-1/3 h-full bg-orange-500 rounded-full"></div>
                             </div>
@@ -56,7 +115,7 @@ export default function LessonViewer() {
                 );
             case 'audio':
                 return (
-                    <div className="bg-gradient-to-br from-purple-900 to-indigo-900 rounded-2xl p-12 text-center">
+                    <div className="bg-linear-to-br from-purple-900 to-indigo-900 rounded-2xl p-12 text-center">
                         <div className="w-32 h-32 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-8 animate-pulse-glow">
                             <Headphones className="w-16 h-16 text-purple-300" />
                         </div>
@@ -97,7 +156,7 @@ export default function LessonViewer() {
                                 <Download className="w-4 h-4" /> Download
                             </button>
                         </div>
-                        <div className="bg-gray-50 rounded-xl p-8 min-h-[400px] flex items-center justify-center border border-gray-100">
+                        <div className="bg-gray-50 rounded-xl p-8 min-h-100 flex items-center justify-center border border-gray-100">
                             <div className="text-center">
                                 <FileText className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                                 <p className="text-gray-500 text-sm">PDF Viewer</p>
@@ -125,15 +184,31 @@ export default function LessonViewer() {
         }
     };
 
+    if (!currentLesson) {
+        return (
+            <div className="space-y-6 animate-fade-in-up">
+                <div>
+                    <h1 className="text-2xl font-bold text-gray-900">Lesson Viewer</h1>
+                    <p className="text-gray-500 text-sm mt-1">Current Semester Lessons</p>
+                </div>
+                <div className="text-center py-12">
+                    <BookOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                    <h3 className="text-lg font-semibold text-gray-900">No Lessons Available</h3>
+                    <p className="text-gray-500">No courses found for the current semester.</p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="space-y-6 animate-fade-in-up">
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900">Lesson Viewer</h1>
-                    <p className="text-gray-500 text-sm mt-1">Introduction to Aqeedah</p>
+                    <p className="text-gray-500 text-sm mt-1">{currentCourseForLesson?.courseName || 'Course Lessons'}</p>
                 </div>
                 <button onClick={() => setShowSidebar(!showSidebar)} className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-xl text-sm text-gray-600 hover:bg-gray-50 transition-colors">
-                    <List className="w-4 h-4" /> {showSidebar ? 'Hide' : 'Show'} Lessons
+                    <List className="w-4 h-4" /> {showSidebar ? 'Hide' : 'Show'} Content
                 </button>
             </div>
 
@@ -152,7 +227,7 @@ export default function LessonViewer() {
                         </div>
                         <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                             <button
-                                onClick={() => setCurrentLessonIndex(Math.max(0, currentLessonIndex - 1))}
+                                onClick={handlePrevious}
                                 disabled={currentLessonIndex === 0}
                                 className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                             >
@@ -162,7 +237,7 @@ export default function LessonViewer() {
                                 Mark Complete
                             </button>
                             <button
-                                onClick={() => setCurrentLessonIndex(Math.min(allLessons.length - 1, currentLessonIndex + 1))}
+                                onClick={handleNext}
                                 disabled={currentLessonIndex === allLessons.length - 1}
                                 className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                             >
@@ -172,34 +247,55 @@ export default function LessonViewer() {
                     </div>
                 </div>
 
-                {/* Sidebar */}
+                {/* Sidebar with Courses and Lessons */}
                 {showSidebar && (
                     <div className="w-80 shrink-0 hidden xl:block">
                         <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden sticky top-6">
                             <div className="p-4 border-b border-gray-100">
-                                <h3 className="font-bold text-gray-900 text-sm">Course Content</h3>
-                                <p className="text-xs text-gray-500 mt-1">{allLessons.filter(l => l.completed).length}/{allLessons.length} completed</p>
+                                <h3 className="font-bold text-gray-900 text-sm">Current Semester Courses</h3>
+                                <p className="text-xs text-gray-500 mt-1">{courseList.length} courses • {allLessons.filter(l => l.completed).length}/{allLessons.length} lessons</p>
                             </div>
                             <div className="max-h-[60vh] overflow-y-auto">
-                                {allLessons.map((lesson, idx) => (
-                                    <button
-                                        key={lesson.id}
-                                        onClick={() => setCurrentLessonIndex(idx)}
-                                        className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-orange-50/50 transition-colors border-b border-gray-50 ${idx === currentLessonIndex ? 'bg-orange-50 border-l-2 border-l-orange-500' : ''
-                                            }`}
-                                    >
-                                        {lesson.completed ? (
-                                            <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" />
-                                        ) : idx === currentLessonIndex ? (
-                                            <Play className="w-4 h-4 text-orange-500 shrink-0" />
-                                        ) : (
-                                            <Circle className="w-4 h-4 text-gray-300 shrink-0" />
+                                {courseList.map((course) => (
+                                    <div key={course.courseId} className="border-b border-gray-50">
+                                        <button
+                                            onClick={() => setExpandedCourse(expandedCourse === course.courseId ? null : course.courseId)}
+                                            className="w-full flex items-center gap-2 px-4 py-3 text-left hover:bg-orange-50/30 transition-colors"
+                                        >
+                                            <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${expandedCourse === course.courseId ? 'rotate-180' : ''}`} />
+                                            <div className="flex-1 min-w-0">
+                                                <p className="text-xs font-semibold text-gray-900 truncate">{course.courseName}</p>
+                                                <p className="text-[10px] text-gray-500 mt-0.5">{course.allLessons.length} lessons</p>
+                                            </div>
+                                        </button>
+
+                                        {expandedCourse === course.courseId && (
+                                            <div className="bg-gray-50/50 border-t border-gray-50">
+                                                {course.allLessons.map((lesson, idx) => {
+                                                    const globalIdx = allLessons.findIndex(l => l.id === lesson.id);
+                                                    return (
+                                                        <button
+                                                            key={lesson.id}
+                                                            onClick={() => setCurrentLessonIndex(globalIdx)}
+                                                            className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-orange-50 transition-colors border-t border-gray-100 text-xs ${globalIdx === currentLessonIndex ? 'bg-orange-50 border-l-2 border-l-orange-500 pl-3' : ''}`}
+                                                        >
+                                                            {lesson.completed ? (
+                                                                <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" />
+                                                            ) : globalIdx === currentLessonIndex ? (
+                                                                <Play className="w-4 h-4 text-orange-500 shrink-0" />
+                                                            ) : (
+                                                                <Circle className="w-4 h-4 text-gray-300 shrink-0" />
+                                                            )}
+                                                            <div className="flex-1 min-w-0">
+                                                                <p className={`text-xs font-medium truncate ${globalIdx === currentLessonIndex ? 'text-orange-600' : 'text-gray-700'}`}>{lesson.title}</p>
+                                                                <p className="text-[10px] text-gray-400 mt-0.5">{lesson.type} • {lesson.duration}</p>
+                                                            </div>
+                                                        </button>
+                                                    );
+                                                })}
+                                            </div>
                                         )}
-                                        <div className="flex-1 min-w-0">
-                                            <p className={`text-xs font-medium truncate ${idx === currentLessonIndex ? 'text-orange-600' : 'text-gray-700'}`}>{lesson.title}</p>
-                                            <p className="text-[10px] text-gray-400 mt-0.5">{lesson.type} • {lesson.duration}</p>
-                                        </div>
-                                    </button>
+                                    </div>
                                 ))}
                             </div>
                         </div>

@@ -65,6 +65,17 @@ export interface Student {
   status: 'active' | 'inactive' | 'suspended';
 }
 
+export interface Teacher {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+  specialization: string;
+  assignedClasses: string[];
+  joinedDate: string;
+  status: 'active' | 'inactive';
+}
+
 export interface Exam {
   id: string;
   courseId: string;
@@ -106,6 +117,8 @@ export interface Announcement {
   targetAudience: 'all' | 'students' | 'specific-class' | 'specific-program';
   classId?: string;
   programId?: string;
+  authorId?: string;
+  authorRole?: 'admin' | 'teacher';
 }
 
 export interface ClassGroup {
@@ -117,6 +130,7 @@ export interface ClassGroup {
   studentCount: number;
   studentIds: string[];
   instructor: string;
+  teacherId?: string;
   startDate: string;
   endDate: string;
   status: 'active' | 'upcoming' | 'completed';
@@ -485,6 +499,15 @@ export const students: Student[] = [
 ];
 
 // ==============================
+// TEACHERS
+// ==============================
+export const teachers: Teacher[] = [
+  { id: 'tea-1', name: 'Sheikh Ahmad Al-Farsi', email: 'ahmad.farsi@example.com', avatar: '👨‍🏫', specialization: 'Aqeedah & Fiqh', assignedClasses: ['class-1'], joinedDate: '2024-01-10', status: 'active' },
+  { id: 'tea-2', name: 'Dr. Muhammad Al-Azhari', email: 'muhammad.azhari@example.com', avatar: '👨‍🏫', specialization: 'Hadith Sciences', assignedClasses: ['class-2'], joinedDate: '2024-03-15', status: 'active' },
+  { id: 'tea-3', name: 'Qari Abdullah Mansoor', email: 'abdullah.mansoor@example.com', avatar: '👨‍🏫', specialization: 'Quran & Tajweed', assignedClasses: ['class-3'], joinedDate: '2024-05-20', status: 'active' },
+];
+
+// ==============================
 // EXAMS
 // ==============================
 export const exams: Exam[] = [
@@ -600,9 +623,9 @@ export const announcements: Announcement[] = [
 // CLASSES
 // ==============================
 export const classes: ClassGroup[] = [
-  { id: 'class-1', name: 'Al-Farooq Class A', programId: 'prog-1', programTitle: 'Fundamentals of Islamic Studies', schedule: 'Sun, Tue, Thu - 6:00 PM to 8:00 PM', studentCount: 4, studentIds: ['stu-1', 'stu-2', 'stu-3', 'stu-7'], instructor: 'Sheikh Ahmad Al-Farsi', startDate: '2025-09-01', endDate: '2026-03-01', status: 'active' },
-  { id: 'class-2', name: 'Al-Noor Class B', programId: 'prog-2', programTitle: 'Advanced Hadith Sciences', schedule: 'Mon, Wed - 7:00 PM to 9:00 PM', studentCount: 3, studentIds: ['stu-4', 'stu-5', 'stu-8'], instructor: 'Dr. Muhammad Al-Azhari', startDate: '2025-09-15', endDate: '2026-06-15', status: 'active' },
-  { id: 'class-3', name: 'Al-Huda Class C', programId: 'prog-3', programTitle: 'Quran Memorization & Tajweed', schedule: 'Daily - 5:00 AM to 6:30 AM', studentCount: 2, studentIds: ['stu-6', 'stu-9'], instructor: 'Qari Abdullah Mansoor', startDate: '2025-10-01', endDate: '2026-10-01', status: 'active' },
+  { id: 'class-1', name: 'Al-Farooq Class A', programId: 'prog-1', programTitle: 'Fundamentals of Islamic Studies', schedule: 'Sun, Tue, Thu - 6:00 PM to 8:00 PM', studentCount: 4, studentIds: ['stu-1', 'stu-2', 'stu-3', 'stu-7'], instructor: 'Sheikh Ahmad Al-Farsi', teacherId: 'tea-1', startDate: '2025-09-01', endDate: '2026-03-01', status: 'active' },
+  { id: 'class-2', name: 'Al-Noor Class B', programId: 'prog-2', programTitle: 'Advanced Hadith Sciences', schedule: 'Mon, Wed - 7:00 PM to 9:00 PM', studentCount: 3, studentIds: ['stu-4', 'stu-5', 'stu-8'], instructor: 'Dr. Muhammad Al-Azhari', teacherId: 'tea-2', startDate: '2025-09-15', endDate: '2026-06-15', status: 'active' },
+  { id: 'class-3', name: 'Al-Huda Class C', programId: 'prog-3', programTitle: 'Quran Memorization & Tajweed', schedule: 'Daily - 5:00 AM to 6:30 AM', studentCount: 2, studentIds: ['stu-6', 'stu-9'], instructor: 'Qari Abdullah Mansoor', teacherId: 'tea-3', startDate: '2025-10-01', endDate: '2026-10-01', status: 'active' },
   { id: 'class-4', name: 'Al-Barakah Class D', programId: 'prog-1', programTitle: 'Fundamentals of Islamic Studies', schedule: 'Sat - 10:00 AM to 1:00 PM', studentCount: 0, studentIds: [], instructor: 'Sheikh Ibrahim Al-Bakri', startDate: '2026-03-01', endDate: '2026-09-01', status: 'upcoming' },
 ];
 
@@ -724,6 +747,7 @@ export const adminStats = {
   announcements: announcements.length,
   recentEnrollments: 12,
   completionRate: 68,
+  totalTeachers: teachers.length,
 };
 
 export const studentStats = {

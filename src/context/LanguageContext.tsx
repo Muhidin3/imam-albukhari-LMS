@@ -114,10 +114,11 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     // Retrieve language from localStorage on mount
     useEffect(() => {
         const storedLang = localStorage.getItem('language') as Language;
-        if (storedLang) {
+        if (storedLang && storedLang !== language) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setLanguage(storedLang);
         }
-    }, []);
+    }, [language]);
 
     // Save language to localStorage on change
     useEffect(() => {

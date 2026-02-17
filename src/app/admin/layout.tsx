@@ -13,8 +13,11 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
     const { t } = useLanguage();
 
     useEffect(() => {
-        setMounted(true);
-    }, []);
+        if (!mounted) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
+            setMounted(true);
+        }
+    }, [mounted]);
 
     if (!mounted) {
         return null;

@@ -50,7 +50,7 @@ export default function ProgramsPage() {
                             className="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-700"
                         />
                     </div>
-                    <div className="flex items-center gap-2">
+                    {/* <div className="flex items-center gap-2">
                         <Filter className="w-4 h-4 text-gray-400" />
                         {['all', 'beginner', 'intermediate', 'advanced', 'all levels'].map((l) => (
                             <button
@@ -62,7 +62,7 @@ export default function ProgramsPage() {
                                 {l === 'all' ? 'All Levels' : l}
                             </button>
                         ))}
-                    </div>
+                    </div> */}
                 </div>
             </section>
 
@@ -76,8 +76,8 @@ export default function ProgramsPage() {
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                                 <div className="absolute top-4 left-4">
                                     <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${program.status === 'active' ? 'bg-green-500/20 text-green-100 border border-green-500/30' :
-                                            program.status === 'upcoming' ? 'bg-blue-500/20 text-blue-100 border border-blue-500/30' :
-                                                'bg-gray-500/20 text-gray-100 border border-gray-500/30'
+                                        program.status === 'upcoming' ? 'bg-blue-500/20 text-blue-100 border border-blue-500/30' :
+                                            'bg-gray-500/20 text-gray-100 border border-gray-500/30'
                                         }`}>{program.status === 'active' ? '● Active' : '◐ Coming Soon'}</span>
                                 </div>
                                 <div className="absolute bottom-4 left-4 right-4">
