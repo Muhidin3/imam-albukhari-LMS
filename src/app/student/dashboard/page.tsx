@@ -64,7 +64,7 @@ export default function StudentDashboard() {
                 {/* Programs Progress */}
                 <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-100 p-6">
                     <div className="flex items-center justify-between mb-6">
-                        <h2 className="text-lg font-bold text-gray-900">{t('My Courses')}</h2>
+                        <h2 className="text-lg font-bold text-gray-900">{t('Programs Progress')}</h2>
                         <Link href="/student/programs" className="text-sm text-orange-500 font-medium hover:text-orange-600 flex items-center gap-1">
                             {t('View')} <ChevronRight className="w-4 h-4" />
                         </Link>
@@ -77,7 +77,7 @@ export default function StudentDashboard() {
                                     <div className="flex items-start justify-between mb-3">
                                         <div className="flex-1">
                                             <h3 className="font-semibold text-gray-900 text-sm">{language === 'am' ? program.titleAm || program.title : program.title}</h3>
-                                            <p className="text-xs text-gray-500 mt-1">{program.totalCourses} {t('Courses')} • {program.duration}</p>
+                                            <p className="text-xs text-gray-500 mt-1">{program.totalCourses} {t('Chapters')} • {program.duration}</p>
                                         </div>
                                         <span className="text-sm font-bold text-orange-500">{progress}%</span>
                                     </div>
@@ -89,8 +89,8 @@ export default function StudentDashboard() {
                                             }`}>
                                             {progress === 100 ? t('Completed') : progress > 0 ? t('In Progress') : t('Not Started')}
                                         </span>
-                                        <Link href="/student/courses" className="text-xs text-orange-500 font-medium flex items-center gap-1 hover:text-orange-600">
-                                            {t('Next')} <ArrowRight className="w-3 h-3" />
+                                        <Link href={`/student/programs/${program.id}`} className="text-xs text-orange-500 font-medium flex items-center gap-1 hover:text-orange-600">
+                                            {t('Continue')} <ArrowRight className="w-3 h-3" />
                                         </Link>
                                     </div>
                                 </div>
@@ -104,8 +104,7 @@ export default function StudentDashboard() {
                     {/* Exam Results */}
                     <div className="bg-white rounded-2xl border border-gray-100 p-6">
                         <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-lg font-bold text-gray-900">{t('Exams')}</h2>
-                            <Link href="/student/exams" className="text-sm text-orange-500 font-medium">{t('View')}</Link>
+                            <h2 className="text-lg font-bold text-gray-900">{t('Recent Scores')}</h2>
                         </div>
                         <div className="space-y-3">
                             {examResults.map((result) => (
@@ -155,12 +154,12 @@ export default function StudentDashboard() {
                         <div className="grid grid-cols-2 gap-3">
                             {[
                                 { label: t('Lesson'), icon: Play, href: '/student/lessons', color: 'from-orange-500 to-amber-500' },
-                                { label: t('Quiz'), icon: FileText, href: '/student/exams', color: 'from-blue-500 to-cyan-500' },
+                                { label: t('Programs'), icon: BookOpen, href: '/student/programs', color: 'from-blue-500 to-cyan-500' },
                                 { label: t('Certificates'), icon: Award, href: '/student/certificates', color: 'from-green-500 to-emerald-500' },
                                 { label: t('Announcements'), icon: Calendar, href: '/student/announcements', color: 'from-purple-500 to-violet-500' },
                             ].map((action) => (
                                 <Link key={action.label} href={action.href} className="p-4 rounded-xl border border-gray-100 hover:border-orange-100 hover:shadow-md transition-all group text-center">
-                                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${action.color} flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform`}>
+                                    <div className={`w-10 h-10 rounded-xl bg-linear-to-br ${action.color} flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform`}>
                                         <action.icon className="w-5 h-5 text-white" />
                                     </div>
                                     <span className="text-xs font-medium text-gray-700">{action.label}</span>

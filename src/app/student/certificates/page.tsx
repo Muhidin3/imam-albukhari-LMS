@@ -41,15 +41,14 @@ export default function StudentCertificates() {
                         {studentCerts.map((cert) => (
                             <div key={cert.id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden card-hover">
                                 {/* Certificate Preview */}
-                                <div className="relative p-8 bg-gradient-to-br from-amber-50 to-orange-50 border-b border-orange-100">
+                                <div className="relative p-8 bg-linear-to-br from-amber-50 to-orange-50 border-b border-orange-100">
                                     <div className="absolute inset-0 islamic-pattern opacity-10"></div>
                                     <div className="relative text-center">
                                         <div className="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center mx-auto mb-3">
                                             <Award className="w-8 h-8 text-orange-500" />
                                         </div>
                                         <p className="text-xs text-orange-500 font-semibold uppercase tracking-widest mb-2">Certificate of Completion</p>
-                                        <h3 className="text-lg font-bold text-gray-900">{cert.courseTitle}</h3>
-                                        <p className="text-sm text-gray-500 mt-1">{cert.programTitle}</p>
+                                        <h3 className="text-lg font-bold text-gray-900">{cert.programTitle}</h3>
                                         <div className="flex items-center justify-center gap-1 mt-3">
                                             {[1, 2, 3, 4, 5].map(i => (
                                                 <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
@@ -75,7 +74,7 @@ export default function StudentCertificates() {
                     <div className="bg-white rounded-2xl border border-gray-100 p-12 text-center">
                         <Award className="w-16 h-16 text-gray-200 mx-auto mb-4" />
                         <h3 className="text-lg font-semibold text-gray-400 mb-2">No certificates yet</h3>
-                        <p className="text-gray-400 text-sm">Complete courses and pass exams to earn certificates</p>
+                        <p className="text-gray-400 text-sm">Complete programs and pass exams to earn certificates</p>
                     </div>
                 )}
             </div>
@@ -85,7 +84,7 @@ export default function StudentCertificates() {
                 <h3 className="font-bold text-gray-900 mb-4">How to Earn a Certificate</h3>
                 <div className="grid sm:grid-cols-3 gap-4">
                     {[
-                        { step: '1', title: 'Complete Lessons', desc: 'Finish all lessons in the course' },
+                        { step: '1', title: 'Complete Chapters', desc: 'Finish all chapters in the program' },
                         { step: '2', title: 'Pass the Exam', desc: 'Score above the passing threshold' },
                         { step: '3', title: 'Download', desc: 'Your certificate will be auto-generated' },
                     ].map(s => (

@@ -35,11 +35,11 @@ export default function AdminCourses() {
             <div className="space-y-8 animate-fade-in-up">
                 <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-2xl font-bold text-gray-900">Course & Lesson Builder</h1>
-                        <p className="text-gray-500 text-sm mt-1">Create and organize courses, modules, and lessons</p>
+                        <h1 className="text-2xl font-bold text-gray-900">Chapter & Lesson Builder</h1>
+                        <p className="text-gray-500 text-sm mt-1">Create and organize chapters and lessons</p>
                     </div>
                     <button onClick={openBuilder} className="gradient-primary text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity flex items-center gap-2 shadow-lg shadow-orange-500/20">
-                        <Plus className="w-4 h-4" /> New Course
+                        <Plus className="w-4 h-4" /> New Chapter
                     </button>
                 </div>
 
@@ -76,54 +76,38 @@ export default function AdminCourses() {
                                 </div>
                             </div>
 
-                            {/* Expanded Modules & Lessons */}
                             {expandedCourse === course.id && (
                                 <div className="border-t border-gray-100 px-5 pb-5">
-                                    {course.modules.map((module) => (
-                                        <div key={module.id} className="mt-4">
-                                            <div className="flex items-center justify-between bg-gray-50 rounded-xl px-4 py-3 mb-2">
-                                                <div className="flex items-center gap-2">
-                                                    <BookOpen className="w-4 h-4 text-orange-500" />
-                                                    <h4 className="text-sm font-semibold text-gray-700">Module {module.order}: {module.title}</h4>
+                                    {course.modules.map((module, index) => (
+                                        <div key={module.id} className="mt-4 p-5 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow">
+                                            <div className="flex items-start justify-between mb-4">
+                                                <div>
+                                                    <h3 className="font-semibold text-gray-900 flex items-center gap-2">
+                                                        <span className="text-xs text-blue-600 font-bold bg-blue-50 px-2 py-0.5 rounded-md">Lesson {index + 1}</span>
+                                                        {module.title}
+                                                    </h3>
                                                 </div>
-                                                <div className="flex items-center gap-1">
-                                                    <button className="p-1.5 rounded-lg hover:bg-gray-200 text-gray-400 hover:text-orange-500 transition-colors">
-                                                        <Edit className="w-3.5 h-3.5" />
+                                                <div className="flex items-center gap-2">
+                                                    <button className="p-1.5 text-gray-400 hover:text-orange-500 rounded-lg transition-colors border border-gray-100 hover:border-orange-200" title="Edit Lesson">
+                                                        <Edit className="w-4 h-4" />
                                                     </button>
-                                                    <button className="p-1.5 rounded-lg hover:bg-gray-200 text-gray-400 hover:text-green-500 transition-colors">
-                                                        <Plus className="w-3.5 h-3.5" />
+                                                    <button className="p-1.5 text-gray-400 hover:text-red-500 rounded-lg transition-colors border border-gray-100 hover:border-red-200" title="Delete Lesson">
+                                                        <Trash2 className="w-4 h-4" />
                                                     </button>
                                                 </div>
                                             </div>
-                                            <div className="space-y-1 ml-4">
-                                                {module.lessons.map((lesson) => (
-                                                    <div key={lesson.id} className="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-gray-50 transition-colors group">
-                                                        <span className={`w-7 h-7 rounded-lg flex items-center justify-center ${lesson.type === 'video' ? 'bg-blue-50 text-blue-500' :
-                                                            lesson.type === 'audio' ? 'bg-purple-50 text-purple-500' :
-                                                                lesson.type === 'pdf' ? 'bg-red-50 text-red-500' :
-                                                                    'bg-gray-50 text-gray-500'
-                                                            }`}>
-                                                            {lesson.type === 'video' ? <Video className="w-3.5 h-3.5" /> :
-                                                                lesson.type === 'audio' ? <Headphones className="w-3.5 h-3.5" /> :
-                                                                    <FileText className="w-3.5 h-3.5" />}
-                                                        </span>
-                                                        <span className="flex-1 text-sm text-gray-700">{lesson.title}</span>
-                                                        <span className="text-xs text-gray-400">{lesson.duration}</span>
-                                                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                            <button className="p-1 rounded hover:bg-gray-200 text-gray-400 hover:text-orange-500">
-                                                                <Edit className="w-3 h-3" />
-                                                            </button>
-                                                            <button className="p-1 rounded hover:bg-gray-200 text-gray-400 hover:text-red-500">
-                                                                <Trash2 className="w-3 h-3" />
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                ))}
+
+                                            <div className="border-2 border-dashed border-gray-200 rounded-xl p-6 text-center hover:border-blue-300 hover:bg-blue-50/30 transition-all cursor-pointer group">
+                                                <div className="w-10 h-10 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+                                                    <Play className="w-5 h-5" />
+                                                </div>
+                                                <p className="text-sm font-medium text-gray-700">Upload Lesson Video</p>
+                                                <p className="text-xs text-gray-400 mt-1">MP4 or WebM (Max 500MB)</p>
                                             </div>
                                         </div>
                                     ))}
-                                    <button className="mt-4 flex items-center gap-2 text-sm text-orange-500 font-medium hover:text-orange-600 transition-colors px-4">
-                                        <Plus className="w-4 h-4" /> Add Module
+                                    <button className="mt-4 flex items-center gap-2 text-sm gradient-primary text-white rounded-lg py-2 px-4 shadow-sm hover:opacity-90 font-medium transition-colors border border-gray-200 hover:border-orange-300">
+                                        <Plus className="w-4 h-4" /> Add Lesson
                                     </button>
                                 </div>
                             )}
@@ -133,7 +117,7 @@ export default function AdminCourses() {
             </div>
 
             {/* Course Builder Modal */}
-            <Modal isOpen={showBuilder} onClose={closeBuilder} title="Create New Course" maxWidth="max-w-2xl">
+            <Modal isOpen={showBuilder} onClose={closeBuilder} title="Create New Chapter" maxWidth="max-w-2xl">
                 <div className="space-y-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1.5">Program</label>
@@ -142,12 +126,12 @@ export default function AdminCourses() {
                         </select>
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1.5">Course Title</label>
-                        <input value={form.title} onChange={(e) => setForm(prev => ({ ...prev, title: e.target.value }))} type="text" placeholder="Enter course title" className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-700" />
+                        <label className="block text-sm font-medium text-gray-700 mb-1.5">Chapter Title</label>
+                        <input value={form.title} onChange={(e) => setForm(prev => ({ ...prev, title: e.target.value }))} type="text" placeholder="Enter chapter title" className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-700" />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1.5">Description</label>
-                        <textarea value={form.description} onChange={(e) => setForm(prev => ({ ...prev, description: e.target.value }))} rows={3} placeholder="Describe the course..." className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 resize-none text-gray-700"></textarea>
+                        <textarea value={form.description} onChange={(e) => setForm(prev => ({ ...prev, description: e.target.value }))} rows={3} placeholder="Describe the chapter..." className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 resize-none text-gray-700"></textarea>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         <div>
@@ -175,7 +159,7 @@ export default function AdminCourses() {
                             Cancel
                         </button>
                         <button onClick={closeBuilder} className="px-5 py-2.5 gradient-primary text-white rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity">
-                            Create Course
+                            Create Chapter
                         </button>
                     </div>
                 </div>

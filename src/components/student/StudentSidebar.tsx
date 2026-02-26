@@ -23,9 +23,7 @@ export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, se
     const menuItems = [
         { label: t('Dashboard'), icon: LayoutDashboard, href: '/student/dashboard' },
         { label: t('Programs'), icon: BookOpen, href: '/student/programs' },
-        { label: t('My Courses'), icon: GraduationCap, href: '/student/courses' },
         { label: t('Lesson Viewer'), icon: PlayCircle, href: '/student/lessons' },
-        { label: t('Exams'), icon: FileText, href: '/student/exams' },
         { label: t('Certificates'), icon: Award, href: '/student/certificates' },
         { label: t('Announcements'), icon: Bell, href: '/student/announcements' },
     ];
@@ -33,7 +31,7 @@ export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, se
     return (
         <aside
             className={`
-                fixed top-0 left-0 h-full bg-[#1A1A2E] border-r border-white/5 
+                fixed top-0 left-0 h-full bg-secondary border-r border-white/5 
                 transition-all duration-300 z-40 flex flex-col 
                 ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
                 ${collapsed ? 'lg:w-[72px]' : 'lg:w-64'}
@@ -109,7 +107,7 @@ export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, se
             {/* User Profile */}
             <div className="border-t border-white/5 p-3">
                 <div className={`flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 transition-colors ${collapsed ? 'justify-center' : ''}`}>
-                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white text-sm font-bold shrink-0">
+                    <div className="w-9 h-9 rounded-full bg-linear-to-br from-orange-500 to-red-500 flex items-center justify-center text-white text-sm font-bold shrink-0">
                         {currentStudent.avatar || <User className="w-4 h-4" />}
                     </div>
                     {!collapsed && (

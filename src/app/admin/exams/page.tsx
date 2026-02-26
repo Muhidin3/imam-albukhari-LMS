@@ -27,7 +27,7 @@ export default function AdminExams() {
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900">Exam Builder</h1>
-                    <p className="text-gray-500 text-sm mt-1">Create and manage MCQ exams for your courses</p>
+                    <p className="text-gray-500 text-sm mt-1">Create and manage tests for chapters and exams for programs</p>
                 </div>
                 <button onClick={() => setShowModal(true)} className="gradient-primary text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity flex items-center gap-2 shadow-lg shadow-orange-500/20">
                     <Plus className="w-4 h-4" /> Create Exam
@@ -57,7 +57,7 @@ export default function AdminExams() {
                         <thead>
                             <tr className="text-left text-gray-500 bg-gray-50/80">
                                 <th className="px-6 py-4 font-medium">Exam</th>
-                                <th className="px-6 py-4 font-medium">Course</th>
+                                <th className="px-6 py-4 font-medium">Chapter</th>
                                 <th className="px-6 py-4 font-medium">Questions</th>
                                 <th className="px-6 py-4 font-medium">Duration</th>
                                 <th className="px-6 py-4 font-medium">Pass Score</th>
@@ -122,7 +122,7 @@ export default function AdminExams() {
                         <input type="text" placeholder="e.g., Midterm Exam" className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-700" />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1.5">Course</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1.5">Chapter</label>
                         <select className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-700 bg-white">
                             {programs.flatMap(p => p.courses).map(c => <option key={c.id}>{c.title}</option>)}
                         </select>

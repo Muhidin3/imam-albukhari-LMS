@@ -37,7 +37,7 @@ export default function ExamDetail() {
                 </button>
                 <div className="flex-1">
                     <h1 className="text-2xl font-bold text-gray-900">{exam.title}</h1>
-                    <p className="text-orange-500 text-sm">{course?.title || 'Unassigned Course'}</p>
+                    <p className="text-orange-500 text-sm">{course?.title || 'Unassigned Chapter'}</p>
                 </div>
                 <div className="flex gap-2">
                     <button className="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium hover:bg-gray-50 transition-all text-gray-600">

@@ -2,7 +2,7 @@
 
 import { useParams, useRouter } from 'next/navigation';
 import { programs } from '@/lib/data';
-import { ChevronLeft, Save, BookOpen, Clock, Users, Plus, Edit } from 'lucide-react';
+import { ChevronLeft, Save, BookOpen, Clock, Users, Plus, Edit, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 
 export default function ProgramDetail() {
@@ -40,7 +40,7 @@ export default function ProgramDetail() {
                 </div>
                 <button
                     onClick={() => setIsEditing(!isEditing)}
-                    className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium hover:bg-gray-50 transition-all flex items-center gap-2"
+                    className="px-4 py-2 bg-white border border-gray-200 text-gray-500 rounded-lg text-sm font-medium hover:bg-gray-50 transition-all flex items-center gap-2"
                 >
                     <Edit className="w-4 h-4" /> {isEditing ? 'Cancel Edit' : 'Edit Program'}
                 </button>
@@ -58,7 +58,7 @@ export default function ProgramDetail() {
                         <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
                             <BookOpen className="w-5 h-5" />
                         </div>
-                        <h3 className="font-semibold text-gray-700">Total Courses</h3>
+                        <h3 className="font-semibold text-gray-700">Total Chapters</h3>
                     </div>
                     <p className="text-3xl font-bold text-gray-900">{program.totalCourses}</p>
                 </div>
@@ -130,9 +130,9 @@ export default function ProgramDetail() {
                 <div className="lg:col-span-2">
                     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
                         <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-                            <h2 className="text-lg font-bold text-gray-900">Included Courses</h2>
+                            <h2 className="text-lg font-bold text-gray-900">Chapters</h2>
                             <button className="text-sm text-orange-500 font-medium hover:underline flex items-center gap-1">
-                                <Plus className="w-4 h-4" /> Add Course
+                                <Plus className="w-4 h-4" /> Add Chapter
                             </button>
                         </div>
                         <div className="divide-y divide-gray-50">
@@ -146,17 +146,32 @@ export default function ProgramDetail() {
                                             <h3 className="font-semibold text-gray-900">{course.title}</h3>
                                             <p className="text-xs text-gray-500">{course.totalLessons} Lessons • {course.duration}</p>
                                         </div>
-                                        <button
-                                            onClick={() => router.push(`/admin/courses/${course.id}`)}
-                                            className="px-3 py-1.5 border border-gray-200 rounded-lg text-xs font-medium hover:bg-white hover:border-gray-300 transition-all"
-                                        >
-                                            Manage
-                                        </button>
+                                        <div className="flex gap-2">
+                                            <button
+                                                className="p-1.5 text-gray-400 hover:text-orange-500 rounded-lg transition-colors border border-gray-100 hover:border-orange-200"
+                                                title="Edit Chapter"
+                                            >
+                                                <Edit className="w-4 h-4" />
+                                            </button>
+                                            <button
+                                                className="p-1.5 text-gray-400 hover:text-red-500 rounded-lg transition-colors border border-gray-100 hover:border-red-200"
+                                                title="Delete Chapter"
+                                            >
+                                                <Trash2 className="w-4 h-4" />
+                                            </button>
+                                            <button
+                                                onClick={() => router.push(`/admin/chapters/${course.id}`)}
+                                                className="px-3 py-1.5 text-gray-500 border border-gray-200 rounded-lg text-xs font-medium hover:bg-white hover:border-gray-300 transition-all"
+                                                title="Manage Lessons in Chapter"
+                                            >
+                                                Manage Lessons
+                                            </button>
+                                        </div>
                                     </div>
                                 ))
                             ) : (
                                 <div className="p-8 text-center text-gray-500 text-sm">
-                                    No courses added yet.
+                                    No chapters added yet.
                                 </div>
                             )}
                         </div>

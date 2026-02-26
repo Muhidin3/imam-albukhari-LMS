@@ -10,7 +10,7 @@ export default function AdminStudents() {
     const router = useRouter();
     const [search, setSearch] = useState('');
     const [statusFilter, setStatusFilter] = useState('all');
-    const [viewMode, setViewMode] = useState<'list' | 'class'>('list');
+    const [viewMode, setViewMode] = useState<'list' | 'program'>('list');
     const [showModal, setShowModal] = useState(false);
 
     const filteredStudents = students.filter(s => {
@@ -47,9 +47,9 @@ export default function AdminStudents() {
                             <List className="w-4 h-4" />
                         </button>
                         <button
-                            onClick={() => setViewMode('class')}
-                            className={`p-2 rounded-lg transition-all ${viewMode === 'class' ? 'bg-orange-100 text-orange-600' : 'text-gray-400 hover:text-gray-600'}`}
-                            title="Group by Class"
+                            onClick={() => setViewMode('program')}
+                            className={`p-2 rounded-lg transition-all ${viewMode === 'program' ? 'bg-orange-100 text-orange-600' : 'text-gray-400 hover:text-gray-600'}`}
+                            title="Group by Program"
                         >
                             <Grid className="w-4 h-4" />
                         </button>
@@ -96,9 +96,7 @@ export default function AdminStudents() {
                             <thead>
                                 <tr className="text-left text-gray-500 bg-gray-50/80">
                                     <th className="px-6 py-4 font-medium">Student</th>
-                                    <th className="px-6 py-4 font-medium">Type</th>
-                                    <th className="px-6 py-4 font-medium">Class</th>
-                                    <th className="px-6 py-4 font-medium">Progress</th>
+                                    <th className="px-6 py-4 font-medium">Programs</th>
                                     <th className="px-6 py-4 font-medium">Status</th>
                                     <th className="px-6 py-4 font-medium">Joined</th>
                                     <th className="px-6 py-4 font-medium">Actions</th>
@@ -107,8 +105,8 @@ export default function AdminStudents() {
                             <tbody className="divide-y divide-gray-50">
                                 {filteredStudents.map((student) => {
                                     const avgProgress = Object.values(student.progress).reduce((a, b) => a + b, 0) / (Object.values(student.progress).length || 1);
-                                    const cls = classes.find(c => c.id === student.classId);
                                     const type = getStudentType(student.id);
+                                    const studentPrograms = programs.filter(p => student.enrolledPrograms.includes(p.id));
 
                                     return (
                                         <tr
@@ -125,21 +123,16 @@ export default function AdminStudents() {
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4">
-                                                <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${type === 'Degree Student' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700'
-                                                    }`}>
-                                                    {type === 'Degree Student' && <GraduationCap className="w-3 h-3" />}
-                                                    {type}
-                                                </span>
-                                            </td>
-                                            <td className="px-6 py-4 text-gray-600 text-xs">{cls?.name || '—'}</td>
-                                            <td className="px-6 py-4">
-                                                <div className="flex items-center gap-2">
-                                                    <div className="w-20 h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                                                        <div className="progress-bar h-full" style={{ width: `${avgProgress}%` }}></div>
+                                            <td className="px-6 py-4 text-gray-600 text-xs">
+                                                {studentPrograms.length > 0 ? (
+                                                    <div className="flex flex-wrap gap-1">
+                                                        {studentPrograms.map(p => (
+                                                            <span key={p.id} className="bg-orange-50 text-orange-600 px-2 py-0.5 rounded-md whitespace-nowrap">
+                                                                {p.title}
+                                                            </span>
+                                                        ))}
                                                     </div>
-                                                    <span className="text-xs text-gray-500">{Math.round(avgProgress)}%</span>
-                                                </div>
+                                                ) : '—'}
                                             </td>
                                             <td className="px-6 py-4">
                                                 <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${student.status === 'active' ? 'badge-success' :
@@ -163,18 +156,18 @@ export default function AdminStudents() {
                 </div>
             ) : (
                 <div className="grid grid-cols-1 gap-8">
-                    {/* Unassigned Students */}
-                    {filteredStudents.some(s => !s.classId) && (
+                    {/* Unenrolled Students */}
+                    {filteredStudents.some(s => !s.enrolledPrograms || s.enrolledPrograms.length === 0) && (
                         <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
                             <div className="p-4 bg-gray-50 border-b border-gray-100 font-bold text-gray-700 flex items-center gap-2">
                                 <div className="w-8 h-8 rounded-lg bg-gray-200 flex items-center justify-center"><Users className="w-4 h-4 text-gray-500" /></div>
-                                Unassigned Students
+                                Unenrolled Students
                                 <span className="ml-auto text-xs font-normal text-gray-500 bg-white px-2 py-1 rounded-full border border-gray-200">
-                                    {filteredStudents.filter(s => !s.classId).length}
+                                    {filteredStudents.filter(s => !s.enrolledPrograms || s.enrolledPrograms.length === 0).length}
                                 </span>
                             </div>
                             <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {filteredStudents.filter(s => !s.classId).map(student => (
+                                {filteredStudents.filter(s => !s.enrolledPrograms || s.enrolledPrograms.length === 0).map(student => (
                                     <div
                                         key={student.id}
                                         className="flex items-center gap-3 p-3 rounded-xl border border-gray-100 hover:border-orange-200 hover:shadow-sm transition-all bg-white cursor-pointer"
@@ -191,23 +184,23 @@ export default function AdminStudents() {
                         </div>
                     )}
 
-                    {/* Class Groups */}
-                    {classes.map(cls => {
-                        const classStudents = filteredStudents.filter(s => s.classId === cls.id);
-                        if (classStudents.length === 0) return null;
+                    {/* Program Groups */}
+                    {programs.map(prog => {
+                        const programStudents = filteredStudents.filter(s => s.enrolledPrograms && s.enrolledPrograms.includes(prog.id));
+                        if (programStudents.length === 0) return null;
 
                         return (
-                            <div key={cls.id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+                            <div key={prog.id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
                                 <div className="p-4 bg-orange-50/30 border-b border-orange-100/50 font-bold text-gray-800 flex items-center gap-2">
                                     <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center"><Users className="w-4 h-4 text-white" /></div>
-                                    {cls.name}
-                                    <span className="text-xs font-normal text-gray-500 ml-2">({cls.programTitle})</span>
+                                    {prog.title}
+                                    <span className="text-xs font-normal text-gray-500 ml-2">({prog.type})</span>
                                     <span className="ml-auto text-xs font-normal text-gray-500 bg-white px-2 py-1 rounded-full border border-gray-200">
-                                        {classStudents.length} Students
+                                        {programStudents.length} Students
                                     </span>
                                 </div>
                                 <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                    {classStudents.map(student => (
+                                    {programStudents.map(student => (
                                         <div
                                             key={student.id}
                                             className="flex items-center gap-3 p-3 rounded-xl border border-gray-100 hover:border-orange-200 hover:shadow-sm transition-all bg-white group cursor-pointer"
@@ -247,17 +240,9 @@ export default function AdminStudents() {
                         </div>
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1.5">Program Enrollment</label>
-                        <select className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-700 bg-white">
-                            <option value="">Select Primary Program...</option>
+                        <label className="block text-sm font-medium text-gray-700 mb-1.5">Program Enrollments (Hold Ctrl/Cmd to select multiple)</label>
+                        <select multiple className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-700 bg-white h-32">
                             {programs.map(p => <option key={p.id} value={p.id}>{p.title} ({p.type})</option>)}
-                        </select>
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1.5">Assign to Class</label>
-                        <select className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-700 bg-white">
-                            <option value="">No Class (Unassigned)</option>
-                            {classes.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                         </select>
                     </div>
                     <div className="flex justify-end gap-3 pt-4">

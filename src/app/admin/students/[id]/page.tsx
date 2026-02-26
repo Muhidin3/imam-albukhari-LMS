@@ -38,7 +38,21 @@ export default function StudentDetail({ params }: { params: Promise<{ id: string
     const [activeTab, setActiveTab] = useState<'overview' | 'academic' | 'profile'>('overview');
 
     const student = students.find(s => s.id === id);
-    const transcript = transcripts.find(t => t.studentId === id);
+    const studentTranscripts = transcripts.filter(t => t.studentId === id);
+
+    let totalScore = 0;
+    let totalCoursesCount = 0;
+    studentTranscripts.forEach(t => {
+        t.semesters.forEach(sem => {
+            sem.courses.forEach(c => {
+                if (c.score > 0) {
+                    totalScore += c.score;
+                    totalCoursesCount++;
+                }
+            });
+        });
+    });
+    const overallAverage = totalCoursesCount > 0 ? (totalScore / totalCoursesCount).toFixed(2) : '0.00';
 
     if (!student) {
         notFound();
@@ -152,94 +166,92 @@ export default function StudentDetail({ params }: { params: Promise<{ id: string
 
                     {activeTab === 'academic' && (
                         <div>
-                            {transcript ? (
+                            {studentTranscripts.length > 0 ? (
                                 <div className="space-y-8">
-                                    <div className="flex flex-wrap gap-4 items-center justify-between bg-blue-50 p-4 rounded-xl border border-blue-100">
+                                    <div className="flex flex-wrap gap-4 items-center justify-between bg-orange-50 p-4 rounded-xl border border-orange-100">
                                         <div>
-                                            <h3 className="font-bold text-blue-900">Cumulative GPA</h3>
-                                            <p className="text-3xl font-bold text-blue-700 mt-1">{transcript.cumulativeGPA.toFixed(2)}</p>
+                                            <h3 className="font-bold text-orange-900">Overall Average Score</h3>
+                                            <p className="text-3xl font-bold text-orange-700 mt-1">{overallAverage} <span className="text-sm font-normal text-orange-600">/ 100</span></p>
                                         </div>
                                         <div className="text-right">
-                                            <p className="text-sm text-blue-600 font-medium">Total Credits Earned</p>
-                                            <p className="text-2xl font-bold text-blue-800">{transcript.totalCredits}</p>
+                                            <p className="text-sm text-orange-600 font-medium">Total Chapters Completed</p>
+                                            <p className="text-2xl font-bold text-orange-800">{totalCoursesCount}</p>
                                         </div>
                                     </div>
 
-                                    {transcript.semesters.map((sem) => (
-                                        <div key={sem.id} className="border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-                                            <div className="bg-gray-50 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-                                                <h3 className="font-bold text-gray-800">{sem.name}</h3>
-                                                <span className="text-sm font-medium text-gray-600 bg-white px-3 py-1 rounded-lg border border-gray-200">
-                                                    Semester GPA: <span className={sem.gpa >= 3.0 ? 'text-green-600' : sem.gpa >= 2.0 ? 'text-orange-600' : 'text-red-600'}>{sem.gpa.toFixed(2)}</span>
-                                                </span>
-                                            </div>
-                                            <div className="overflow-x-auto">
-                                                <table className="w-full text-sm">
-                                                    <thead>
-                                                        <tr className="bg-gray-50/50 border-b border-gray-100 text-left text-gray-500">
-                                                            <th className="px-6 py-3 font-medium">Course Code</th>
-                                                            <th className="px-6 py-3 font-medium">Course Title</th>
-                                                            <th className="px-6 py-3 font-medium">Credits</th>
-                                                            <th className="px-6 py-3 font-medium">Grade</th>
-                                                            <th className="px-6 py-3 font-medium">Score</th>
-                                                            <th className="px-6 py-3 font-medium">Status</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody className="divide-y divide-gray-50">
-                                                        {sem.courses.map((course, idx) => (
-                                                            <tr key={idx} className="hover:bg-gray-50/50">
-                                                                <td className="px-6 py-3 font-mono text-gray-600">{course.code}</td>
-                                                                <td className="px-6 py-3 font-medium text-gray-900">{course.title}</td>
-                                                                <td className="px-6 py-3 text-gray-600">{course.credits}</td>
-                                                                <td className="px-6 py-3 font-bold">
-                                                                    <span className={
-                                                                        ['A', 'A-', 'B+'].includes(course.grade) ? 'text-green-600' :
-                                                                            ['F', 'D'].includes(course.grade) ? 'text-red-600' : 'text-gray-900'
-                                                                    }>{course.grade}</span>
-                                                                </td>
-                                                                <td className="px-6 py-3 text-gray-600">{course.score > 0 ? course.score : '-'}</td>
-                                                                <td className="px-6 py-3">
-                                                                    {course.status === 'pass' && (
-                                                                        <span className="flex items-center gap-1 text-green-600 bg-green-50 px-2 py-0.5 rounded text-xs font-medium w-fit">
-                                                                            <CheckCircle className="w-3 h-3" /> Passed
-                                                                        </span>
-                                                                    )}
-                                                                    {course.status === 'fail' && (
-                                                                        <span className="flex items-center gap-1 text-red-600 bg-red-50 px-2 py-0.5 rounded text-xs font-medium w-fit">
-                                                                            <XCircle className="w-3 h-3" /> Failed
-                                                                        </span>
-                                                                    )}
-                                                                    {course.status === 'in-progress' && (
-                                                                        <span className="flex items-center gap-1 text-blue-600 bg-blue-50 px-2 py-0.5 rounded text-xs font-medium w-fit">
-                                                                            <Clock className="w-3 h-3" /> In Progress
-                                                                        </span>
-                                                                    )}
-                                                                </td>
+                                    {studentTranscripts.map((transcript) => {
+                                        const program = programs.find(p => p.id === transcript.programId);
+                                        // Flatten courses from all semesters for this program
+                                        const allCourses = transcript.semesters.flatMap(sem => sem.courses);
+
+                                        return (
+                                            <div key={transcript.programId} className="border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                                                <div className="bg-gray-50 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                                                    <h3 className="font-bold text-gray-800">{program?.title || 'Unknown Program'}</h3>
+                                                    <span className="text-sm font-medium text-gray-600 bg-white px-3 py-1 rounded-lg border border-gray-200">
+                                                        Total Credits: {transcript.totalCredits}
+                                                    </span>
+                                                </div>
+                                                <div className="overflow-x-auto">
+                                                    <table className="w-full text-sm">
+                                                        <thead>
+                                                            <tr className="bg-gray-50/50 border-b border-gray-100 text-left text-gray-500">
+                                                                <th className="px-6 py-3 font-medium">Chapter Code</th>
+                                                                <th className="px-6 py-3 font-medium">Chapter Title</th>
+                                                                <th className="px-6 py-3 font-medium">Result / 100</th>
+                                                                <th className="px-6 py-3 font-medium">Status</th>
                                                             </tr>
-                                                        ))}
-                                                    </tbody>
-                                                </table>
+                                                        </thead>
+                                                        <tbody className="divide-y divide-gray-50">
+                                                            {allCourses.map((course, idx) => (
+                                                                <tr key={idx} className="hover:bg-gray-50/50">
+                                                                    <td className="px-6 py-3 font-mono text-gray-600">{course.code}</td>
+                                                                    <td className="px-6 py-3 font-medium text-gray-900">{course.title}</td>
+                                                                    <td className="px-6 py-3 font-bold">
+                                                                        <span className={course.score >= 50 ? 'text-green-600' : course.score > 0 ? 'text-red-600' : 'text-gray-400'}>
+                                                                            {course.score > 0 ? course.score : '-'}
+                                                                        </span>
+                                                                    </td>
+                                                                    <td className="px-6 py-3">
+                                                                        {course.status === 'pass' && (
+                                                                            <span className="flex items-center gap-1 text-green-600 bg-green-50 px-2 py-0.5 rounded text-xs font-medium w-fit">
+                                                                                <CheckCircle className="w-3 h-3" /> Passed
+                                                                            </span>
+                                                                        )}
+                                                                        {course.status === 'fail' && (
+                                                                            <span className="flex items-center gap-1 text-red-600 bg-red-50 px-2 py-0.5 rounded text-xs font-medium w-fit">
+                                                                                <XCircle className="w-3 h-3" /> Failed
+                                                                            </span>
+                                                                        )}
+                                                                        {course.status === 'in-progress' && (
+                                                                            <span className="flex items-center gap-1 text-blue-600 bg-blue-50 px-2 py-0.5 rounded text-xs font-medium w-fit">
+                                                                                <Clock className="w-3 h-3" /> In Progress
+                                                                            </span>
+                                                                        )}
+                                                                    </td>
+                                                                </tr>
+                                                            ))}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        );
+                                    })}
                                 </div>
                             ) : (
                                 <div className="text-center py-12">
                                     <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
                                         <FileText className="w-8 h-8 text-gray-300" />
                                     </div>
-                                    <h3 className="text-lg font-medium text-gray-900">No Transcript Available</h3>
-                                    <p className="text-gray-500 mt-2">No academic record found for this student.</p>
-                                    <button className="mt-4 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium hover:bg-gray-50">
-                                        Generate Transcript
-                                    </button>
+                                    <h3 className="text-lg font-medium text-gray-900">No Academic Record</h3>
+                                    <p className="text-gray-500 mt-2">No results found for this student.</p>
                                 </div>
                             )}
                         </div>
                     )}
 
                     {activeTab === 'profile' && (
-                        <div className="max-w-2xl">
+                        <div className="max-w-2xl text-gray-500">
                             <h3 className="font-bold text-gray-900 mb-6">Personal Information</h3>
                             <div className="space-y-4">
                                 <div className="grid grid-cols-2 gap-4">

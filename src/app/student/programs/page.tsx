@@ -2,146 +2,117 @@
 
 import Link from 'next/link';
 import { programs, currentStudent, transcripts } from '@/lib/data';
-import { BookOpen, Clock, Users, ArrowRight, GraduationCap, ChevronRight, BookMarked, CheckCircle2, Circle, User } from 'lucide-react';
-import { useState } from 'react';
+import { BookOpen, ArrowRight, CheckCircle2, TrendingUp, BarChart3 } from 'lucide-react';
 
-export default function StudentSemesters() {
-    const [expandedSemester, setExpandedSemester] = useState<string | null>(null);
-    
-    // Get the student's transcript
-    const transcript = transcripts.find(t => t.studentId === currentStudent.id);
-    const semesters = transcript?.semesters ?? [];
-    
-    // Get the program details
-    const enrolledProgram = programs.find(p => p.id === transcript?.programId);
-    
-    // Find current semester (last one with in-progress courses)
-    const currentSemester = semesters.find(s => s.courses.some(c => c.status === 'in-progress'));
-    const pastSemesters = semesters.filter(s => s.id !== currentSemester?.id);
-
-    // Helper function to get course instructor from programs data
-    const getCourseInstructor = (courseCode: string) => {
-        for (const program of programs) {
-            for (const course of program.courses) {
-                if (course.id === courseCode) {
-                    return course.instructor;
-                }
-            }
-        }
-        return 'Not Available';
-    };
+export default function StudentPrograms() {
+    // Get the student's transcripts
+    const studentTranscripts = transcripts.filter(t => t.studentId === currentStudent.id);
 
     return (
         <div className="space-y-8 animate-fade-in-up">
             <div>
-                <h1 className="text-2xl font-bold text-gray-900">My Semesters</h1>
-                <p className="text-gray-500 text-sm mt-1">View your current and past semesters with courses and instructors</p>
+                <h1 className="text-2xl font-bold text-gray-900">My Programs</h1>
+                <p className="text-gray-500 text-sm mt-1">View your enrolled programs and progress</p>
             </div>
 
-            {/* Current Semester */}
-            {currentSemester && (
-                <div>
-                    <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                        <BookMarked className="w-5 h-5 text-orange-500" />
-                        Current Semester
-                    </h2>
-                    <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
-                        <button
-                            onClick={() => setExpandedSemester(expandedSemester === currentSemester.id ? null : currentSemester.id)}
-                            className="w-full flex items-center justify-between p-6 border-b border-gray-50 hover:bg-gray-50 transition-colors"
-                        >
-                            <div className="text-left">
-                                <h3 className="text-lg font-bold text-gray-900">{currentSemester.name}</h3>
-                                <div className="flex items-center gap-4 mt-2 text-sm text-gray-500">
-                                    <span>GPA: <span className="font-semibold text-gray-900">{currentSemester.gpa}</span></span>
-                                    <span className="text-orange-500 font-semibold">{currentSemester.courses.length} courses</span>
+            {studentTranscripts.length > 0 ? (
+                <div className="grid md:grid-cols-2 gap-6">
+                    {studentTranscripts.map((transcript) => {
+                        const program = programs.find(p => p.id === transcript.programId);
+                        const allChapters = transcript.semesters.flatMap(sem => sem.courses);
+                        const completedChapters = allChapters.filter(c => c.status === 'pass');
+                        const inProgressChapters = allChapters.filter(c => c.status === 'in-progress');
+
+                        // Per-program average
+                        let programScore = 0;
+                        let programChapterCount = 0;
+                        allChapters.forEach(c => {
+                            if (c.score > 0) {
+                                programScore += c.score;
+                                programChapterCount++;
+                            }
+                        });
+                        const programAverage = programChapterCount > 0 ? (programScore / programChapterCount).toFixed(1) : '0.0';
+
+                        const progress = currentStudent.progress[transcript.programId] || 0;
+
+                        return (
+                            <Link key={transcript.programId} href={`/student/programs/${transcript.programId}`}>
+                                <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden card-hover cursor-pointer group h-full">
+                                    {/* Program Header */}
+                                    <div className="relative p-6 bg-linear-to-br from-orange-50 to-amber-50/30 border-b border-orange-100/50">
+                                        <div className="absolute top-4 right-4">
+                                            <div className="w-10 h-10 rounded-xl bg-white/80 flex items-center justify-center group-hover:bg-orange-100 transition-colors">
+                                                <ArrowRight className="w-5 h-5 text-orange-500 group-hover:translate-x-0.5 transition-transform" />
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-3">
+                                            <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center shrink-0">
+                                                <BookOpen className="w-6 h-6 text-white" />
+                                            </div>
+                                            <div>
+                                                <h3 className="text-lg font-bold text-gray-900 group-hover:text-orange-600 transition-colors">{program?.title || 'Unknown Program'}</h3>
+                                                <p className="text-xs text-gray-500 mt-1">{program?.duration} • {allChapters.length} chapters</p>
+                                            </div>
+                                        </div>
+
+                                        {/* Progress bar */}
+                                        <div className="mt-4">
+                                            <div className="flex items-center justify-between text-xs mb-1.5">
+                                                <span className="text-gray-500">Progress</span>
+                                                <span className="font-bold text-orange-600">{progress}%</span>
+                                            </div>
+                                            <div className="w-full h-2 bg-white/60 rounded-full overflow-hidden">
+                                                <div className="progress-bar h-full" style={{ width: `${progress}%` }}></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Stats */}
+                                    <div className="p-5">
+                                        <div className="grid grid-cols-3 gap-3">
+                                            <div className="text-center p-3 bg-orange-50/50 rounded-xl">
+                                                <div className="flex items-center justify-center mb-1">
+                                                    <TrendingUp className="w-4 h-4 text-orange-500" />
+                                                </div>
+                                                <div className="text-lg font-bold text-gray-900">{programAverage}</div>
+                                                <div className="text-[10px] text-gray-500 mt-0.5">Average / 100</div>
+                                            </div>
+                                            <div className="text-center p-3 bg-green-50/50 rounded-xl">
+                                                <div className="flex items-center justify-center mb-1">
+                                                    <CheckCircle2 className="w-4 h-4 text-green-500" />
+                                                </div>
+                                                <div className="text-lg font-bold text-gray-900">{completedChapters.length}</div>
+                                                <div className="text-[10px] text-gray-500 mt-0.5">Completed</div>
+                                            </div>
+                                            <div className="text-center p-3 bg-blue-50/50 rounded-xl">
+                                                <div className="flex items-center justify-center mb-1">
+                                                    <BarChart3 className="w-4 h-4 text-blue-500" />
+                                                </div>
+                                                <div className="text-lg font-bold text-gray-900">{inProgressChapters.length}</div>
+                                                <div className="text-[10px] text-gray-500 mt-0.5">In Progress</div>
+                                            </div>
+                                        </div>
+
+                                        <div className="mt-4 flex items-center justify-between">
+                                            <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${progress === 100 ? 'bg-green-50 text-green-600' : progress > 0 ? 'bg-orange-50 text-orange-600' : 'bg-gray-50 text-gray-500'}`}>
+                                                {progress === 100 ? 'Completed' : progress > 0 ? 'In Progress' : 'Not Started'}
+                                            </span>
+                                            <span className="text-xs text-orange-500 font-medium group-hover:underline flex items-center gap-1">
+                                                Continue Learning <ArrowRight className="w-3 h-3" />
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <ChevronRight className={`w-5 h-5 text-gray-400 transition-transform ${expandedSemester === currentSemester.id ? 'rotate-90' : ''}`} />
-                        </button>
-
-                        {expandedSemester === currentSemester.id && (
-                            <div className="p-6 space-y-4">
-                                {currentSemester.courses.map((course, idx) => (
-                                    <Link href={`/student/courses?courseCode=${course.code}`} key={course.code}>
-                                        <div className="bg-linear-to-r from-orange-50 to-transparent rounded-xl border border-orange-100 p-4 cursor-pointer hover:shadow-md transition-all group">
-                                            <div className="flex items-start justify-between mb-3">
-                                                <div className="flex-1">
-                                                    <div className="flex items-center gap-2">
-                                                        <h4 className="font-semibold text-gray-900 group-hover:text-orange-600 transition-colors">{course.title}</h4>
-                                                        {course.status === 'pass' && <CheckCircle2 className="w-4 h-4 text-green-500" />}
-                                                    </div>
-                                                    <div className="text-xs text-gray-500 mt-1">{course.code} • {course.credits} credits</div>
-                                                </div>
-                                                <div className="text-right">
-                                                    <div className="font-bold text-gray-900">{course.grade}</div>
-                                                    <div className="text-xs text-gray-500">{course.score}%</div>
-                                                </div>
-                                            </div>
-                                            <div className="flex items-center justify-between text-xs text-gray-500">
-                                                <span className={`px-2.5 py-1 rounded-full font-medium ${course.status === 'pass' ? 'bg-green-50 text-green-600' : course.status === 'fail' ? 'bg-red-50 text-red-600' : 'bg-blue-50 text-blue-600'}`}>
-                                                    {course.status === 'in-progress' ? 'In Progress' : course.status.charAt(0).toUpperCase() + course.status.slice(1)}
-                                                </span>
-                                                <span className="flex items-center gap-1">
-                                                    <User className="w-3 h-3" />
-                                                    Instructor Info Available
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                ))}
-                            </div>
-                        )}
-                    </div>
+                            </Link>
+                        );
+                    })}
                 </div>
-            )}
-
-            {/* Past Semesters */}
-            {pastSemesters.length > 0 && (
-                <div>
-                    <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                        <BookOpen className="w-5 h-5 text-gray-500" />
-                        Past Semesters
-                    </h2>
-                    <div className="space-y-4">
-                        {pastSemesters.map((semester) => (
-                            <div key={semester.id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
-                                <button
-                                    onClick={() => setExpandedSemester(expandedSemester === semester.id ? null : semester.id)}
-                                    className="w-full flex items-center justify-between p-6 border-b border-gray-50 hover:bg-gray-50 transition-colors"
-                                >
-                                    <div className="text-left">
-                                        <h3 className="text-base font-semibold text-gray-900">{semester.name}</h3>
-                                        <div className="flex items-center gap-4 mt-2 text-sm text-gray-500">
-                                            <span>GPA: <span className="font-semibold text-gray-700">{semester.gpa}</span></span>
-                                            <span>{semester.courses.length} courses</span>
-                                        </div>
-                                    </div>
-                                    <ChevronRight className={`w-5 h-5 text-gray-400 transition-transform ${expandedSemester === semester.id ? 'rotate-90' : ''}`} />
-                                </button>
-
-                                {expandedSemester === semester.id && (
-                                    <div className="p-6 space-y-3 bg-gray-50/30">
-                                        {semester.courses.map((course) => (
-                                            <div key={course.code} className="bg-white rounded-lg border border-gray-100 p-4 flex items-center justify-between">
-                                                <div className="flex-1">
-                                                    <div className="flex items-center gap-2">
-                                                        <h4 className="font-medium text-gray-900">{course.title}</h4>
-                                                        {course.status === 'pass' && <CheckCircle2 className="w-4 h-4 text-green-500" />}
-                                                    </div>
-                                                    <div className="text-xs text-gray-500 mt-1">{course.code} • {course.credits} credits</div>
-                                                </div>
-                                                <div className="text-right ml-4">
-                                                    <div className="font-semibold text-gray-900">{course.grade}</div>
-                                                    <div className="text-xs text-gray-500">{course.score}%</div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
+            ) : (
+                <div className="text-center py-12">
+                    <BookOpen className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                    <h3 className="text-lg font-semibold text-gray-900">No Programs</h3>
+                    <p className="text-gray-500">You don&apos;t have any enrolled programs yet.</p>
                 </div>
             )}
         </div>

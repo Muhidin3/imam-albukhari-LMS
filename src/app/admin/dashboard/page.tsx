@@ -27,7 +27,7 @@ export default function AdminDashboard() {
                 {[
                     { label: 'Total Students', value: adminStats.totalStudents, icon: Users, color: 'from-blue-500 to-cyan-500', change: '+12%', up: true },
                     { label: 'Active Programs', value: adminStats.activePrograms, icon: BookOpen, color: 'from-orange-500 to-amber-500', change: '+2', up: true },
-                    { label: 'Total Courses', value: adminStats.totalCourses, icon: Layers, color: 'from-green-500 to-emerald-500', change: '+5', up: true },
+                    { label: 'Total Chapters', value: adminStats.totalCourses, icon: Layers, color: 'from-green-500 to-emerald-500', change: '+5', up: true },
                     { label: 'Completion Rate', value: `${adminStats.completionRate}%`, icon: TrendingUp, color: 'from-purple-500 to-violet-500', change: '+3%', up: true },
                 ].map((stat) => (
                     <div key={stat.label} className="bg-white rounded-2xl border border-gray-100 p-5 card-hover">
@@ -163,7 +163,7 @@ export default function AdminDashboard() {
                         <div className="space-y-2">
                             {[
                                 { label: 'Create Program', href: '/admin/programs', icon: BookOpen },
-                                { label: 'Add Course', href: '/admin/courses', icon: Layers },
+                                { label: 'Add Chapter', href: '/admin/chapters', icon: Layers },
                                 { label: 'Create Exam', href: '/admin/exams', icon: FileText },
                                 { label: 'New Announcement', href: '/admin/announcements', icon: Bell },
                             ].map((action) => (

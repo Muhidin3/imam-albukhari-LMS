@@ -23,10 +23,7 @@ export default function AdminSidebar({ collapsed, setCollapsed, mobileOpen, setM
     const menuItems = [
         { label: t('Dashboard'), icon: LayoutDashboard, href: '/admin/dashboard' },
         { label: t('Programs'), icon: BookOpen, href: '/admin/programs' },
-        { label: t('Courses'), icon: Layers, href: '/admin/courses' },
-        { label: t('Class Manager'), icon: Users, href: '/admin/classes' },
         { label: t('Students'), icon: GraduationCap, href: '/admin/students' },
-        { label: t('Exam Builder'), icon: FileText, href: '/admin/exams' },
         { label: t('Certificates'), icon: Award, href: '/admin/certificates' },
         { label: t('Announcements'), icon: Bell, href: '/admin/announcements' },
     ];
