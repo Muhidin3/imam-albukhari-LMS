@@ -51,7 +51,7 @@ export default function AdminCertificates() {
                                     <button className="flex-1 py-2 text-center text-xs font-medium text-orange-500 bg-orange-50 rounded-lg hover:bg-orange-100 transition-colors flex items-center justify-center gap-1">
                                         <Edit className="w-3 h-3" /> Edit
                                     </button>
-                                    <button className="flex-1 py-2 text-center text-xs font-medium text-blue-500 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors flex items-center justify-center gap-1">
+                                    <button className="flex-1 py-2 text-center text-xs font-medium text-orange-500 bg-orange-50 rounded-lg hover:bg-orange-100 transition-colors flex items-center justify-center gap-1">
                                         <Eye className="w-3 h-3" /> Preview
                                     </button>
                                     <button className="py-2 px-3 text-xs font-medium text-red-500 bg-red-50 rounded-lg hover:bg-red-100 transition-colors">
@@ -98,7 +98,7 @@ export default function AdminCertificates() {
                                             </td>
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center gap-1">
-                                                    <button className="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-blue-500"><Eye className="w-4 h-4" /></button>
+                                                    <button className="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-orange-500"><Eye className="w-4 h-4" /></button>
                                                     <button className="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-green-500"><Download className="w-4 h-4" /></button>
                                                 </div>
                                             </td>

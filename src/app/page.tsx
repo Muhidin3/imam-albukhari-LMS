@@ -12,36 +12,37 @@ import { programs } from '@/lib/data';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-[#FAFAF8]">
+    // <div className="min-h-screen bg-[#FAFAF8]">
+    <div className="min-h-screen bg-white">
       <PublicNavbar />
 
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
         {/* Background */}
-        <div className="absolute inset-0 gradient-hero"></div>
-        <div className="absolute inset-0 islamic-pattern opacity-30"></div>
+        {/* <div className="absolute inset-0 hero-gradient"></div>
+        <div className="absolute inset-0 islamic-pattern opacity-30"></div> */}
 
         {/* Floating elements */}
         <div className="absolute top-20 right-20 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl animate-float"></div>
         <div className="absolute bottom-20 left-20 w-96 h-96 bg-orange-400/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }}></div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 bg-linear-to-bl from-orange-300 via-orange-100 to-white">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="stagger-children">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500/10 rounded-full border border-orange-500/20 mb-6">
-                <Sparkles className="w-4 h-4 text-orange-400" />
-                <span className="text-orange-300 text-sm font-medium">Begin Your Journey of Knowledge</span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100/80 rounded-full border border-orange-200 mb-6">
+                <Sparkles className="w-4 h-4 text-orange-500" />
+                <span className="text-orange-700 text-sm font-medium">Begin Your Journey of Knowledge</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                 Seeking Knowledge is an{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-300">
+                <span className="text-orange-500">
                   Obligation
                 </span>{' '}
                 Upon Every Muslim
               </h1>
 
-              <p className="mt-6 text-lg text-gray-300 leading-relaxed max-w-xl">
+              <p className="mt-6 text-lg text-gray-600 leading-relaxed max-w-xl">
                 Join Imam Al-Bukhari Islamic Institute&apos;s comprehensive learning platform.
                 Access structured programs in Islamic sciences taught by qualified scholars from anywhere in the world.
               </p>
@@ -50,24 +51,24 @@ export default function LandingPage() {
                 <Link href="/register" className="gradient-primary text-white px-8 py-3.5 rounded-xl font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-orange-500/25 flex items-center gap-2 text-sm">
                   Start Learning <ArrowRight className="w-4 h-4" />
                 </Link>
-                <Link href="/programs" className="border border-white/20 text-white px-8 py-3.5 rounded-xl font-semibold hover:bg-white/5 transition-colors flex items-center gap-2 text-sm backdrop-blur-sm">
+                <Link href="/programs" className="border border-orange-200 text-orange-700 px-8 py-3.5 rounded-xl font-semibold hover:bg-orange-50 transition-colors flex items-center gap-2 text-sm">
                   <Play className="w-4 h-4" /> Explore Programs
                 </Link>
               </div>
 
               <div className="mt-10 flex items-center gap-8">
                 <div>
-                  <div className="text-2xl font-bold text-white">1200+</div>
+                  <div className="text-2xl font-bold text-gray-900">1200+</div>
                   <div className="text-gray-400 text-sm">Students</div>
                 </div>
                 <div className="w-px h-10 bg-white/10"></div>
                 <div>
-                  <div className="text-2xl font-bold text-white">6</div>
+                  <div className="text-2xl font-bold text-gray-900">6</div>
                   <div className="text-gray-400 text-sm">Programs</div>
                 </div>
                 <div className="w-px h-10 bg-white/10"></div>
                 <div>
-                  <div className="text-2xl font-bold text-white">20+</div>
+                  <div className="text-2xl font-bold text-gray-900">20+</div>
                   <div className="text-gray-400 text-sm">Scholars</div>
                 </div>
               </div>
@@ -82,20 +83,20 @@ export default function LandingPage() {
                     <div className="w-20 h-20 mx-auto rounded-2xl gradient-primary flex items-center justify-center mb-4 shadow-lg shadow-orange-500/30">
                       <BookOpen className="w-10 h-10 text-white" />
                     </div>
-                    <h3 className="text-white text-xl font-bold">Imam Al-Bukhari</h3>
-                    <p className="text-orange-300 text-sm mt-1">Islamic Institute</p>
+                    <h3 className="text-gray-900 text-xl font-bold">Imam Al-Bukhari</h3>
+                    <p className="text-orange-600 text-sm mt-1">Islamic Institute</p>
                   </div>
 
                   <div className="space-y-3">
                     {[
-                      { icon: BookMarked, label: 'Aqeedah & Fiqh', color: 'text-blue-400' },
-                      { icon: Mic, label: 'Quran & Tajweed', color: 'text-green-400' },
-                      { icon: FileTextIcon, label: 'Hadith Sciences', color: 'text-purple-400' },
-                      { icon: Globe, label: 'Islamic History', color: 'text-cyan-400' },
+                      { icon: BookMarked, label: 'Aqeedah & Fiqh', color: 'text-orange-500' },
+                      { icon: Mic, label: 'Quran & Tajweed', color: 'text-orange-500' },
+                      { icon: FileTextIcon, label: 'Hadith Sciences', color: 'text-orange-500' },
+                      { icon: Globe, label: 'Islamic History', color: 'text-orange-500' },
                     ].map((item) => (
                       <div key={item.label} className="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors cursor-pointer">
                         <item.icon className={`w-5 h-5 ${item.color}`} />
-                        <span className="text-gray-200 text-sm font-medium">{item.label}</span>
+                        <span className="text-gray-700 text-sm font-medium">{item.label}</span>
                         <ChevronRight className="w-4 h-4 text-gray-500 ml-auto" />
                       </div>
                     ))}
@@ -103,14 +104,14 @@ export default function LandingPage() {
 
                   <div className="mt-6 p-4 rounded-xl bg-orange-500/10 border border-orange-500/20">
                     <div className="flex items-center gap-2 mb-2">
-                      <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                      <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                      <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                      <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                      <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                      <Star className="w-4 h-4 text-orange-400 fill-orange-400" />
+                      <Star className="w-4 h-4 text-orange-400 fill-orange-400" />
+                      <Star className="w-4 h-4 text-orange-400 fill-orange-400" />
+                      <Star className="w-4 h-4 text-orange-400 fill-orange-400" />
+                      <Star className="w-4 h-4 text-orange-400 fill-orange-400" />
                     </div>
-                    <p className="text-gray-300 text-xs italic">&quot;An excellent platform for authentic Islamic learning. The courses are well-structured and the scholars are knowledgeable.&quot;</p>
-                    <p className="text-orange-400 text-xs mt-2 font-medium">— Fatimah Al-Noor, Student</p>
+                    <p className="text-gray-600 text-xs italic">&quot;An excellent platform for authentic Islamic learning. The courses are well-structured and the scholars are knowledgeable.&quot;</p>
+                    <p className="text-orange-500 text-xs mt-2 font-medium">— Fatimah Al-Noor, Student</p>
                   </div>
                 </div>
               </div>
@@ -144,9 +145,9 @@ export default function LandingPage() {
                   <div className="absolute inset-0 islamic-pattern opacity-20"></div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                   <div className="absolute bottom-4 left-4 right-4">
-                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${program.status === 'active' ? 'bg-green-500/20 text-green-100 border border-green-500/30' :
-                      program.status === 'upcoming' ? 'bg-blue-500/20 text-blue-100 border border-blue-500/30' :
-                        'bg-gray-500/20 text-gray-100 border border-gray-500/30'
+                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${program.status === 'active' ? 'bg-orange-100/80 text-orange-700 border border-orange-200' :
+                      program.status === 'upcoming' ? 'bg-orange-50 text-orange-700 border border-orange-100' :
+                        'bg-orange-100/60 text-orange-700 border border-orange-200'
                       }`}>{program.status === 'active' ? '● Active' : program.status === 'upcoming' ? '◐ Coming Soon' : '✓ Completed'}</span>
                   </div>
                   <div className="absolute top-4 right-4 text-3xl">
@@ -210,12 +211,12 @@ export default function LandingPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: BookOpen, title: 'Structured Programs', desc: 'Carefully curated curriculum following a clear path from basics to advanced studies', color: 'from-orange-500 to-amber-500' },
-              { icon: GraduationCap, title: 'Qualified Scholars', desc: 'Learn from scholars with ijazah and recognized credentials in their fields', color: 'from-blue-500 to-cyan-500' },
-              { icon: Play, title: 'Multi-format Lessons', desc: 'Access video lectures, audio recordings, and PDF materials at your own pace', color: 'from-green-500 to-emerald-500' },
-              { icon: FileTextIcon, title: 'Interactive Exams', desc: 'Test your knowledge with MCQ exams and receive instant results and feedback', color: 'from-purple-500 to-violet-500' },
-              { icon: Award, title: 'Certificates', desc: 'Earn verified certificates upon successful completion of programs and courses', color: 'from-pink-500 to-rose-500' },
-              { icon: Users, title: 'Community Learning', desc: 'Join classes with fellow students and benefit from group learning and discussion', color: 'from-indigo-500 to-blue-500' },
+              { icon: BookOpen, title: 'Structured Programs', desc: 'Carefully curated curriculum following a clear path from basics to advanced studies', color: 'from-orange-400 to-orange-600' },
+              { icon: GraduationCap, title: 'Qualified Scholars', desc: 'Learn from scholars with ijazah and recognized credentials in their fields', color: 'from-orange-300 to-orange-500' },
+              { icon: Play, title: 'Multi-format Lessons', desc: 'Access video lectures, audio recordings, and PDF materials at your own pace', color: 'from-orange-200 to-orange-400' },
+              { icon: FileTextIcon, title: 'Interactive Exams', desc: 'Test your knowledge with MCQ exams and receive instant results and feedback', color: 'from-orange-300 to-orange-500' },
+              { icon: Award, title: 'Certificates', desc: 'Earn verified certificates upon successful completion of programs and courses', color: 'from-orange-400 to-orange-600' },
+              { icon: Users, title: 'Community Learning', desc: 'Join classes with fellow students and benefit from group learning and discussion', color: 'from-orange-200 to-orange-500' },
             ].map((feature) => (
               <div key={feature.title} className="group p-8 rounded-2xl border border-gray-100 hover:border-orange-100 hover:shadow-xl hover:shadow-orange-500/5 transition-all duration-300 bg-white card-hover">
                 <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform`}>
@@ -261,25 +262,25 @@ export default function LandingPage() {
 
       {/* CTA Section */}
       <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 gradient-dark"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-50 via-orange-100 to-orange-200"></div>
         <div className="absolute inset-0 islamic-pattern opacity-20"></div>
         <div className="relative max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Ready to Begin Your <span className="text-orange-400">Journey?</span></h2>
-          <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Ready to Begin Your <span className="text-orange-500">Journey?</span></h2>
+          <p className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
             Join thousands of students worldwide who are deepening their understanding of Islam through structured, authentic education.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/register" className="gradient-primary text-white px-10 py-4 rounded-xl font-bold text-lg hover:opacity-90 transition-opacity shadow-xl shadow-orange-500/30 flex items-center gap-2">
               Register Now <ArrowRight className="w-5 h-5" />
             </Link>
-            <Link href="/programs" className="bg-white/10 text-white px-10 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 transition-colors backdrop-blur-sm border border-white/10">
+            <Link href="/programs" className="bg-white text-orange-700 px-10 py-4 rounded-xl font-semibold text-lg hover:bg-orange-50 transition-colors border border-orange-200">
               View Programs
             </Link>
           </div>
           <div className="mt-12 flex justify-center gap-8 text-sm text-gray-400">
-            <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-400" /> Free Registration</span>
-            <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-400" /> Certified Scholars</span>
-            <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-400" /> Flexible Schedule</span>
+            <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-orange-500" /> Free Registration</span>
+            <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-orange-500" /> Certified Scholars</span>
+            <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-orange-500" /> Flexible Schedule</span>
           </div>
         </div>
       </section>

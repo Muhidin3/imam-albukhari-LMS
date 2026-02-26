@@ -13,7 +13,7 @@ export default function AdminAnnouncements() {
         switch (priority) {
             case 'high': return <AlertTriangle className="w-4 h-4 text-red-500" />;
             case 'medium': return <Megaphone className="w-4 h-4 text-orange-500" />;
-            default: return <Info className="w-4 h-4 text-blue-500" />;
+            default: return <Info className="w-4 h-4 text-orange-500" />;
         }
     };
 
@@ -46,7 +46,7 @@ export default function AdminAnnouncements() {
             {/* Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-white rounded-2xl border border-gray-100 p-5 flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center"><Bell className="w-5 h-5 text-blue-500" /></div>
+                    <div className="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center"><Bell className="w-5 h-5 text-orange-500" /></div>
                     <div><div className="text-xl font-bold text-gray-900">{announcements.length}</div><div className="text-xs text-gray-500">Total</div></div>
                 </div>
                 <div className="bg-white rounded-2xl border border-gray-100 p-5 flex items-center gap-3">
@@ -71,7 +71,7 @@ export default function AdminAnnouncements() {
                     {announcements.map((ann) => (
                         <div key={ann.id} className={`bg-white rounded-2xl border p-6 card-hover group ${ann.priority === 'high' ? 'border-red-100' : 'border-gray-100'}`}>
                             <div className="flex items-start gap-4">
-                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${ann.priority === 'high' ? 'bg-red-50' : ann.priority === 'medium' ? 'bg-orange-50' : 'bg-blue-50'}`}>
+                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${ann.priority === 'high' ? 'bg-red-50' : ann.priority === 'medium' ? 'bg-orange-50' : 'bg-orange-50'}`}>
                                     {getPriorityIcon(ann.priority)}
                                 </div>
                                 <div className="flex-1 min-w-0">
@@ -93,7 +93,7 @@ export default function AdminAnnouncements() {
                                     <div className="mt-4 flex items-center gap-2">
                                         <span className={`px-2.5 py-1 rounded-full text-xs font-medium capitalize ${ann.targetAudience === 'all' ? 'bg-gray-100 text-gray-600' :
                                                 ann.targetAudience === 'specific-program' ? 'bg-purple-50 text-purple-600' :
-                                                    ann.targetAudience === 'specific-class' ? 'bg-blue-50 text-blue-600' : 'bg-orange-50 text-orange-600'
+                                                    ann.targetAudience === 'specific-class' ? 'bg-orange-50 text-orange-600' : 'bg-orange-50 text-orange-600'
                                             }`}>
                                             {getAudienceLabel(ann)}
                                         </span>

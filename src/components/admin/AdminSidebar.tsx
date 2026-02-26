@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 
 import { useLanguage } from '@/context/LanguageContext';
+import Image from 'next/image';
 
 interface AdminSidebarProps {
     collapsed: boolean;
@@ -31,7 +32,7 @@ export default function AdminSidebar({ collapsed, setCollapsed, mobileOpen, setM
     return (
         <aside
             className={`
-                fixed top-0 left-0 h-full bg-[#0F0F1A] border-r border-white/5 
+                fixed top-0 left-0 h-full bg-white/60 backdrop-blur-2xl border-r border-white/5 
                 transition-all duration-300 z-40 flex flex-col 
                 ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
                 ${collapsed ? 'lg:w-[72px]' : 'lg:w-64'}
@@ -42,17 +43,18 @@ export default function AdminSidebar({ collapsed, setCollapsed, mobileOpen, setM
             <div className={`h-16 flex items-center ${collapsed ? 'justify-center' : 'justify-between px-4'} border-b border-white/5`}>
                 {!collapsed && (
                     <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
-                            <Shield className="w-4 h-4 text-white" />
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+                            {/* <Shield className="w-4 h-4 text-white" /> */}
+                            <Image src="/logo.png" alt="Logo" width={100} height={100} className="w-10 h-10" />
                         </div>
                         <div className="lg:block">
-                            <span className="text-white font-bold text-sm block">{t('Admin Panel')}</span>
+                            <span className="text-gray-700 font-bold text-sm block">{t('Admin Panel')}</span>
                             <span className="text-orange-400 text-[9px] -mt-0.5 block tracking-wider uppercase">Imam Al-Bukhari</span>
                         </div>
                     </div>
                 )}
                 {collapsed && (
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-lg bg-linear-to-br from-orange-500 to-red-500 flex items-center justify-center">
                         <Shield className="w-4 h-4 text-white" />
                     </div>
                 )}
@@ -60,7 +62,7 @@ export default function AdminSidebar({ collapsed, setCollapsed, mobileOpen, setM
                 {/* Desktop Collapse Toggle */}
                 <button
                     onClick={() => setCollapsed(!collapsed)}
-                    className="text-gray-500 hover:text-white transition-colors hidden lg:block"
+                    className="text-gray-500 hover:text-black transition-colors hidden lg:block"
                 >
                     {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
                 </button>
@@ -68,7 +70,7 @@ export default function AdminSidebar({ collapsed, setCollapsed, mobileOpen, setM
                 {/* Mobile Close Button */}
                 <button
                     onClick={() => setMobileOpen(false)}
-                    className="text-gray-400 hover:text-white lg:hidden"
+                    className="text-gray-400 hover:text-black lg:hidden"
                 >
                     <X className="w-5 h-5" />
                 </button>
@@ -88,7 +90,7 @@ export default function AdminSidebar({ collapsed, setCollapsed, mobileOpen, setM
                             onClick={() => setMobileOpen(false)}
                             className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${isActive
                                 ? 'bg-orange-500/10 text-orange-400'
-                                : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
+                                : 'text-gray-400 hover:text-orange-400 hover:bg-white/5'
                                 } ${collapsed ? 'justify-center' : ''}`}
                             title={collapsed ? item.label : undefined}
                         >

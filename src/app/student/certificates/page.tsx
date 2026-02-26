@@ -22,7 +22,7 @@ export default function StudentCertificates() {
                     <div className="text-xs text-gray-500">Earned</div>
                 </div>
                 <div className="bg-white rounded-2xl border border-gray-100 p-5 text-center">
-                    <BookOpen className="w-8 h-8 text-blue-500 mx-auto mb-2" />
+                    <BookOpen className="w-8 h-8 text-orange-500 mx-auto mb-2" />
                     <div className="text-2xl font-bold text-gray-900">2</div>
                     <div className="text-xs text-gray-500">In Progress</div>
                 </div>

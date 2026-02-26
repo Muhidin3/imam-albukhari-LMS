@@ -82,7 +82,7 @@ export default function AdminPrograms() {
                                         <div className="flex items-center gap-2">
                                             <button
                                                 onClick={() => handleRowClick(prog.id)}
-                                                className="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-blue-500 transition-colors"
+                                                className="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-orange-500 transition-colors"
                                                 title="View"
                                             >
                                                 <Eye className="w-4 h-4" />

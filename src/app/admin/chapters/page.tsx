@@ -55,8 +55,8 @@ export default function AdminCourses() {
                                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setExpandedCourse(expandedCourse === course.id ? null : course.id); } }}
                                 className="w-full flex items-center gap-4 p-5 hover:bg-gray-50/50 transition-colors text-left cursor-pointer"
                             >
-                                <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
-                                    <Layers className="w-5 h-5 text-blue-500" />
+                                <div className="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center shrink-0">
+                                    <Layers className="w-5 h-5 text-orange-500" />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <div className="flex items-center gap-2">
@@ -83,7 +83,7 @@ export default function AdminCourses() {
                                             <div className="flex items-start justify-between mb-4">
                                                 <div>
                                                     <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-                                                        <span className="text-xs text-blue-600 font-bold bg-blue-50 px-2 py-0.5 rounded-md">Lesson {index + 1}</span>
+                                                        <span className="text-xs text-orange-600 font-bold bg-orange-50 px-2 py-0.5 rounded-md">Lesson {index + 1}</span>
                                                         {module.title}
                                                     </h3>
                                                 </div>
@@ -97,8 +97,8 @@ export default function AdminCourses() {
                                                 </div>
                                             </div>
 
-                                            <div className="border-2 border-dashed border-gray-200 rounded-xl p-6 text-center hover:border-blue-300 hover:bg-blue-50/30 transition-all cursor-pointer group">
-                                                <div className="w-10 h-10 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+                                            <div className="border-2 border-dashed border-gray-200 rounded-xl p-6 text-center hover:border-orange-300 hover:bg-orange-50/30 transition-all cursor-pointer group">
+                                                <div className="w-10 h-10 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
                                                     <Play className="w-5 h-5" />
                                                 </div>
                                                 <p className="text-sm font-medium text-gray-700">Upload Lesson Video</p>

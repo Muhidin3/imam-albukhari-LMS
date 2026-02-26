@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { currentStudent } from '@/lib/data';
 import { useLanguage } from '@/context/LanguageContext';
+import Image from 'next/image';
 
 interface StudentSidebarProps {
     collapsed: boolean;
@@ -32,7 +33,7 @@ export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, se
     return (
         <aside
             className={`
-                fixed top-0 left-0 h-full bg-secondary border-r border-white/5 
+                fixed top-0 left-0 h-full bg-white/60 backdrop-blur-2xl border-r border-white/5  text-black
                 transition-all duration-300 z-40 flex flex-col 
                 ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
                 ${collapsed ? 'lg:w-[72px]' : 'lg:w-64'}
@@ -43,11 +44,12 @@ export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, se
             <div className={`h-16 flex items-center ${collapsed ? 'justify-center' : 'justify-between px-4'} border-b border-white/5`}>
                 {!collapsed && (
                     <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
-                            <BookOpen className="w-4 h-4 text-white" />
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+                            {/* <BookOpen className="w-4 h-4 text-white" /> */}
+                            <Image src="/logo.png" alt="Logo" className="w-10 h-10" width={1000} height={1000} />
                         </div>
                         <div className="lg:block">
-                            <span className="text-white font-bold text-sm block">{t('Student Portal')}</span>
+                            <span className="text-gray-700 font-bold text-sm block">{t('Student Portal')}</span>
                             <span className="text-orange-400 text-[9px] -mt-0.5 block tracking-wider uppercase">Imam Al-Bukhari</span>
                         </div>
                     </div>
@@ -61,7 +63,7 @@ export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, se
                 {/* Desktop Collapse Toggle */}
                 <button
                     onClick={() => setCollapsed(!collapsed)}
-                    className="text-gray-500 hover:text-white transition-colors hidden lg:block"
+                    className="text-gray-500 hover:text-black transition-colors hidden lg:block"
                 >
                     {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
                 </button>
@@ -69,7 +71,7 @@ export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, se
                 {/* Mobile Close Button */}
                 <button
                     onClick={() => setMobileOpen(false)}
-                    className="text-gray-400 hover:text-white lg:hidden"
+                    className="text-gray-400 hover:text-black lg:hidden"
                 >
                     <X className="w-5 h-5" />
                 </button>
@@ -89,7 +91,7 @@ export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, se
                             onClick={() => setMobileOpen(false)}
                             className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${isActive
                                 ? 'bg-orange-500/10 text-orange-400'
-                                : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
+                                : 'text-gray-400 hover:text-orange-400 hover:bg-white/5'
                                 } ${collapsed ? 'justify-center' : ''}`}
                             title={collapsed ? item.label : undefined}
                         >

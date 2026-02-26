@@ -76,7 +76,7 @@ export default function ProgramsPage() {
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                                 <div className="absolute top-4 left-4">
                                     <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${program.status === 'active' ? 'bg-green-500/20 text-green-100 border border-green-500/30' :
-                                        program.status === 'upcoming' ? 'bg-blue-500/20 text-blue-100 border border-blue-500/30' :
+                                        program.status === 'upcoming' ? 'bg-orange-500/20 text-orange-100 border border-orange-500/30' :
                                             'bg-gray-500/20 text-gray-100 border border-gray-500/30'
                                         }`}>{program.status === 'active' ? '● Active' : '◐ Coming Soon'}</span>
                                 </div>

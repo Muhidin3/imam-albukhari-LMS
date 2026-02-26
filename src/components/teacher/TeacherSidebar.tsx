@@ -31,7 +31,7 @@ export default function TeacherSidebar({ collapsed, setCollapsed, mobileOpen, se
     return (
         <aside
             className={`
-                fixed top-0 left-0 h-full bg-[#1A1A2E] border-r border-white/5 
+                fixed top-0 left-0 h-full bg-[#3A1700] border-r border-white/5 
                 transition-all duration-300 z-40 flex flex-col 
                 ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
                 ${collapsed ? 'lg:w-[72px]' : 'lg:w-64'}

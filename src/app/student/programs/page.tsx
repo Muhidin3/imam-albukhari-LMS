@@ -85,9 +85,9 @@ export default function StudentPrograms() {
                                                 <div className="text-lg font-bold text-gray-900">{completedChapters.length}</div>
                                                 <div className="text-[10px] text-gray-500 mt-0.5">Completed</div>
                                             </div>
-                                            <div className="text-center p-3 bg-blue-50/50 rounded-xl">
+                                            <div className="text-center p-3 bg-orange-50/50 rounded-xl">
                                                 <div className="flex items-center justify-center mb-1">
-                                                    <BarChart3 className="w-4 h-4 text-blue-500" />
+                                                    <BarChart3 className="w-4 h-4 text-orange-500" />
                                                 </div>
                                                 <div className="text-lg font-bold text-gray-900">{inProgressChapters.length}</div>
                                                 <div className="text-[10px] text-gray-500 mt-0.5">In Progress</div>

@@ -142,7 +142,7 @@ export default function AdminStudents() {
                                             <td className="px-6 py-4 text-gray-500 text-xs">{student.joinedDate}</td>
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
-                                                    <button onClick={() => handleNavigate(student.id)} className="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-blue-500 transition-colors"><Eye className="w-4 h-4" /></button>
+                                                    <button onClick={() => handleNavigate(student.id)} className="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-orange-500 transition-colors"><Eye className="w-4 h-4" /></button>
                                                     <button onClick={() => handleNavigate(student.id)} className="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-orange-500 transition-colors"><Edit className="w-4 h-4" /></button>
                                                     <button className="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-green-500 transition-colors"><Mail className="w-4 h-4" /></button>
                                                 </div>
@@ -215,7 +215,7 @@ export default function AdminStudents() {
                                                 </div>
                                             </div>
                                             <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <button onClick={(e) => { e.stopPropagation(); handleNavigate(student.id); }} className="text-gray-400 hover:text-blue-500"><Edit className="w-4 h-4" /></button>
+                                                <button onClick={(e) => { e.stopPropagation(); handleNavigate(student.id); }} className="text-gray-400 hover:text-orange-500"><Edit className="w-4 h-4" /></button>
                                             </div>
                                         </div>
                                     ))}

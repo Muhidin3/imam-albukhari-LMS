@@ -100,7 +100,7 @@ export default function ChatBot() {
                     <div className="h-80 overflow-y-auto px-4 py-4 space-y-4 bg-gray-50">
                         {messages.map((msg) => (
                             <div key={msg.id} className={`flex gap-2 ${msg.sender === 'user' ? 'flex-row-reverse' : ''}`}>
-                                <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${msg.sender === 'bot' ? 'bg-orange-100 text-orange-600' : 'bg-blue-100 text-blue-600'
+                                <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${msg.sender === 'bot' ? 'bg-orange-100 text-orange-600' : 'bg-orange-200 text-orange-700'
                                     }`}>
                                     {msg.sender === 'bot' ? <Bot className="w-3.5 h-3.5" /> : <User className="w-3.5 h-3.5" />}
                                 </div>

@@ -103,10 +103,10 @@ export default function LoginPage() {
                             <Link href="/student/dashboard" className="block w-full gradient-primary text-white py-3.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-orange-500/20 text-center">
                                 Sign In as Student
                             </Link>
-                            <Link href="/admin/dashboard" className="block w-full bg-[#1A1A2E] text-white py-3.5 rounded-xl text-sm font-semibold hover:bg-[#16213E] transition-colors text-center">
+                            <Link href="/admin/dashboard" className="block w-full bg-[#6D2C00] text-white py-3.5 rounded-xl text-sm font-semibold hover:bg-[#A04000] transition-colors text-center">
                                 Sign In as Admin
                             </Link>
-                            <Link href="/teacher/dashboard" className="block w-full bg-blue-600 text-white py-3.5 rounded-xl text-sm font-semibold hover:bg-blue-700 transition-colors text-center shadow-lg shadow-blue-500/20">
+                            <Link href="/teacher/dashboard" className="block w-full bg-orange-600 text-white py-3.5 rounded-xl text-sm font-semibold hover:bg-orange-700 transition-colors text-center shadow-lg shadow-orange-500/20">
                                 Sign In as Teacher
                             </Link>
                         </div>

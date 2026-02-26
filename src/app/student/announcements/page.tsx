@@ -8,7 +8,7 @@ export default function StudentAnnouncements() {
         switch (priority) {
             case 'high': return <AlertTriangle className="w-4 h-4 text-red-500" />;
             case 'medium': return <Megaphone className="w-4 h-4 text-orange-500" />;
-            default: return <Info className="w-4 h-4 text-blue-500" />;
+            default: return <Info className="w-4 h-4 text-orange-500" />;
         }
     };
 
@@ -24,7 +24,7 @@ export default function StudentAnnouncements() {
                     <div key={ann.id} className={`bg-white rounded-2xl border p-6 card-hover ${ann.priority === 'high' ? 'border-red-100' : 'border-gray-100'
                         }`}>
                         <div className="flex items-start gap-4">
-                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${ann.priority === 'high' ? 'bg-red-50' : ann.priority === 'medium' ? 'bg-orange-50' : 'bg-blue-50'
+                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${ann.priority === 'high' ? 'bg-red-50' : ann.priority === 'medium' ? 'bg-orange-50' : 'bg-orange-50'
                                 }`}>
                                 {getPriorityIcon(ann.priority)}
                             </div>

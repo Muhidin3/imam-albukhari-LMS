@@ -88,7 +88,7 @@ export default function StudentDetail({ params }: { params: Promise<{ id: string
                             {student.status.toUpperCase()}
                         </span>
                         {enrolledProgs.map(p => (
-                            <span key={p.id} className="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-600 border border-blue-100">
+                            <span key={p.id} className="px-3 py-1 rounded-full text-xs font-medium bg-orange-50 text-orange-600 border border-orange-100">
                                 {p.title}
                             </span>
                         ))}
@@ -150,7 +150,7 @@ export default function StudentDetail({ params }: { params: Promise<{ id: string
                                 <div className="space-y-4">
                                     {[1, 2, 3].map(i => (
                                         <div key={i} className="flex gap-3 items-start">
-                                            <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center shrink-0 mt-0.5">
+                                            <div className="w-8 h-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center shrink-0 mt-0.5">
                                                 <FileText className="w-4 h-4" />
                                             </div>
                                             <div>
@@ -224,7 +224,7 @@ export default function StudentDetail({ params }: { params: Promise<{ id: string
                                                                             </span>
                                                                         )}
                                                                         {course.status === 'in-progress' && (
-                                                                            <span className="flex items-center gap-1 text-blue-600 bg-blue-50 px-2 py-0.5 rounded text-xs font-medium w-fit">
+                                                                            <span className="flex items-center gap-1 text-orange-600 bg-orange-50 px-2 py-0.5 rounded text-xs font-medium w-fit">
                                                                                 <Clock className="w-3 h-3" /> In Progress
                                                                             </span>
                                                                         )}

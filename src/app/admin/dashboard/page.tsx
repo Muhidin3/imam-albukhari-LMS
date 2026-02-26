@@ -25,7 +25,7 @@ export default function AdminDashboard() {
             {/* Stats Grid */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 {[
-                    { label: 'Total Students', value: adminStats.totalStudents, icon: Users, color: 'from-blue-500 to-cyan-500', change: '+12%', up: true },
+                    { label: 'Total Students', value: adminStats.totalStudents, icon: Users, color: 'from-orange-400 to-orange-600', change: '+12%', up: true },
                     { label: 'Active Programs', value: adminStats.activePrograms, icon: BookOpen, color: 'from-orange-500 to-amber-500', change: '+2', up: true },
                     { label: 'Total Chapters', value: adminStats.totalCourses, icon: Layers, color: 'from-green-500 to-emerald-500', change: '+5', up: true },
                     { label: 'Completion Rate', value: `${adminStats.completionRate}%`, icon: TrendingUp, color: 'from-purple-500 to-violet-500', change: '+3%', up: true },
@@ -49,10 +49,10 @@ export default function AdminDashboard() {
             {/* Second Row */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 {[
-                    { label: 'Active Classes', value: adminStats.totalClasses, icon: GraduationCap, bg: 'bg-indigo-50', color: 'text-indigo-500' },
+                    { label: 'Active Classes', value: adminStats.totalClasses, icon: GraduationCap, bg: 'bg-orange-50', color: 'text-orange-500' },
                     { label: 'Published Exams', value: adminStats.publishedExams, icon: FileText, bg: 'bg-pink-50', color: 'text-pink-500' },
                     { label: 'Certificates Issued', value: adminStats.certificatesIssued, icon: Award, bg: 'bg-amber-50', color: 'text-amber-500' },
-                    { label: 'Announcements', value: adminStats.announcements, icon: Bell, bg: 'bg-teal-50', color: 'text-teal-500' },
+                    { label: 'Announcements', value: adminStats.announcements, icon: Bell, bg: 'bg-orange-50', color: 'text-orange-500' },
                 ].map((stat) => (
                     <div key={stat.label} className="bg-white rounded-2xl border border-gray-100 p-5">
                         <div className="flex items-center gap-3">

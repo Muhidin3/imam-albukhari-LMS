@@ -32,7 +32,7 @@ export default function StudentDashboard() {
                 {[
                     { label: t('Programs'), value: studentStats.enrolledPrograms, icon: BookOpen, color: 'text-orange-500', bg: 'bg-orange-50' },
                     { label: t('Completed'), value: `${studentStats.completedLessons}/${studentStats.totalLessons}`, icon: CheckCircle2, color: 'text-green-500', bg: 'bg-green-50' },
-                    { label: t('Exams'), value: studentStats.upcomingExams, icon: FileText, color: 'text-blue-500', bg: 'bg-blue-50' },
+                    { label: t('Exams'), value: studentStats.upcomingExams, icon: FileText, color: 'text-orange-500', bg: 'bg-orange-50' },
                     { label: t('Score'), value: `${studentStats.overallProgress}%`, icon: TrendingUp, color: 'text-purple-500', bg: 'bg-purple-50' },
                 ].map((stat) => (
                     <div key={stat.label} className="bg-white rounded-2xl p-5 border border-gray-100 card-hover">
@@ -142,7 +142,7 @@ export default function StudentDashboard() {
                         <div className="grid grid-cols-2 gap-3">
                             {[
                                 { label: t('Lesson'), icon: Play, href: '/student/lessons', color: 'from-orange-500 to-amber-500' },
-                                { label: t('Programs'), icon: BookOpen, href: '/student/programs', color: 'from-blue-500 to-cyan-500' },
+                                { label: t('Programs'), icon: BookOpen, href: '/student/programs', color: 'from-orange-400 to-orange-600' },
                                 { label: t('Certificates'), icon: Award, href: '/student/certificates', color: 'from-green-500 to-emerald-500' },
                                 { label: t('Announcements'), icon: Calendar, href: '/student/announcements', color: 'from-purple-500 to-violet-500' },
                             ].map((action) => (
