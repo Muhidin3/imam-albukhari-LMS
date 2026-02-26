@@ -326,7 +326,7 @@ export default function LessonViewer() {
                                             onClick={() => {
                                                 setCurrentLessonIndex(globalIdx);
                                                 // Auto-hide panel on mobile after selecting a lesson
-                                                if (window.innerWidth < 1280) setShowSidebar(false);
+                                                if (window.innerWidth < 1280) setShowSidebar(true);
                                             }}
                                             className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-orange-50 transition-colors border-t border-gray-100 text-xs ${globalIdx === currentLessonIndex ? 'bg-orange-50 border-l-2 border-l-orange-500 pl-3' : ''}`}
                                         >
@@ -371,9 +371,9 @@ export default function LessonViewer() {
                     </div>
                     <p className="text-gray-500 text-xs sm:text-sm truncate">{activeProgram.title} — {currentChapterForLesson?.chapterName || 'Lessons'}</p>
                 </div>
-                <button onClick={() => setShowSidebar(!showSidebar)} className="flex items-center gap-2 px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs sm:text-sm text-gray-600 hover:bg-gray-50 transition-colors shrink-0">
+                {/* <button onClick={() => setShowSidebar(!showSidebar)} className="flex items-center gap-2 px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs sm:text-sm text-gray-600 hover:bg-gray-50 transition-colors shrink-0">
                     <List className="w-4 h-4" /> <span className="hidden sm:inline">{showSidebar ? 'Hide' : 'Show'}</span> Content
-                </button>
+                </button> */}
             </div>
 
 

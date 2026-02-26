@@ -20,21 +20,9 @@ export default function StudentDashboard() {
                 <div className="absolute inset-0 islamic-pattern opacity-10"></div>
                 <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
                 <div className="relative">
-                    <div className="flex items-center gap-3 mb-2">
+                    <div className="flex items-center gap-3">
                         <span className="text-2xl">👋</span>
                         <h1 className="text-2xl font-bold text-white">{t('Welcome back')}, {currentStudent.name.split(' ')[0]}!</h1>
-                    </div>
-                    <p className="text-orange-100 text-sm max-w-xl">Continue your journey of seeking knowledge. You have made great progress this week!</p>
-
-                    <div className="flex items-center gap-6 mt-6">
-                        <div className="flex items-center gap-2 bg-white/10 rounded-xl px-4 py-2">
-                            <Flame className="w-4 h-4 text-yellow-300" />
-                            <span className="text-white text-sm font-medium">{studentStats.currentStreak} Day Streak</span>
-                        </div>
-                        <div className="flex items-center gap-2 bg-white/10 rounded-xl px-4 py-2">
-                            <Clock className="w-4 h-4 text-orange-200" />
-                            <span className="text-white text-sm font-medium">{studentStats.studyHoursThisWeek}h this week</span>
-                        </div>
                     </div>
                 </div>
             </div>

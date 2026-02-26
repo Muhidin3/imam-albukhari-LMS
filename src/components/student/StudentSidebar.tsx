@@ -26,6 +26,7 @@ export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, se
         { label: t('Lesson Viewer'), icon: PlayCircle, href: '/student/lessons' },
         { label: t('Certificates'), icon: Award, href: '/student/certificates' },
         { label: t('Announcements'), icon: Bell, href: '/student/announcements' },
+        { label: t('Profile'), icon: User, href: '/student/profile' },
     ];
 
     return (
@@ -106,7 +107,7 @@ export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, se
 
             {/* User Profile */}
             <div className="border-t border-white/5 p-3">
-                <div className={`flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 transition-colors ${collapsed ? 'justify-center' : ''}`}>
+                <Link href="/student/profile" className={`flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 transition-colors cursor-pointer ${collapsed ? 'justify-center' : ''}`}>
                     <div className="w-9 h-9 rounded-full bg-linear-to-br from-orange-500 to-red-500 flex items-center justify-center text-white text-sm font-bold shrink-0">
                         {currentStudent.avatar || <User className="w-4 h-4" />}
                     </div>
@@ -122,7 +123,7 @@ export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, se
                         <p className="text-white text-sm font-medium truncate">{currentStudent.name}</p>
                         <p className="text-gray-500 text-xs truncate">{currentStudent.email}</p>
                     </div>
-                </div>
+                </Link>
                 <Link
                     href="/"
                     className={`flex items-center gap-3 px-3 py-2.5 mt-1 rounded-xl text-gray-500 hover:text-red-400 hover:bg-red-500/5 text-sm transition-all ${collapsed ? 'justify-center' : ''}`}

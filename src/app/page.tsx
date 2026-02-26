@@ -119,38 +119,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full border border-orange-100 mb-4">
-              <span className="text-orange-600 text-sm font-medium">Why Choose Us</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">A Modern Approach to <span className="text-orange-500">Islamic Education</span></h2>
-            <p className="mt-4 text-gray-500 max-w-2xl mx-auto">Experience a seamless learning journey with our comprehensive platform designed for seekers of knowledge</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { icon: BookOpen, title: 'Structured Programs', desc: 'Carefully curated curriculum following a clear path from basics to advanced studies', color: 'from-orange-500 to-amber-500' },
-              { icon: GraduationCap, title: 'Qualified Scholars', desc: 'Learn from scholars with ijazah and recognized credentials in their fields', color: 'from-blue-500 to-cyan-500' },
-              { icon: Play, title: 'Multi-format Lessons', desc: 'Access video lectures, audio recordings, and PDF materials at your own pace', color: 'from-green-500 to-emerald-500' },
-              { icon: FileTextIcon, title: 'Interactive Exams', desc: 'Test your knowledge with MCQ exams and receive instant results and feedback', color: 'from-purple-500 to-violet-500' },
-              { icon: Award, title: 'Certificates', desc: 'Earn verified certificates upon successful completion of programs and courses', color: 'from-pink-500 to-rose-500' },
-              { icon: Users, title: 'Community Learning', desc: 'Join classes with fellow students and benefit from group learning and discussion', color: 'from-indigo-500 to-blue-500' },
-            ].map((feature) => (
-              <div key={feature.title} className="group p-8 rounded-2xl border border-gray-100 hover:border-orange-100 hover:shadow-xl hover:shadow-orange-500/5 transition-all duration-300 bg-white card-hover">
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform`}>
-                  <feature.icon className="w-7 h-7 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{feature.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Programs Preview */}
       <section className="py-24 bg-gray-50 islamic-pattern">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -177,8 +145,8 @@ export default function LandingPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                   <div className="absolute bottom-4 left-4 right-4">
                     <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${program.status === 'active' ? 'bg-green-500/20 text-green-100 border border-green-500/30' :
-                        program.status === 'upcoming' ? 'bg-blue-500/20 text-blue-100 border border-blue-500/30' :
-                          'bg-gray-500/20 text-gray-100 border border-gray-500/30'
+                      program.status === 'upcoming' ? 'bg-blue-500/20 text-blue-100 border border-blue-500/30' :
+                        'bg-gray-500/20 text-gray-100 border border-gray-500/30'
                       }`}>{program.status === 'active' ? '● Active' : program.status === 'upcoming' ? '◐ Coming Soon' : '✓ Completed'}</span>
                   </div>
                   <div className="absolute top-4 right-4 text-3xl">
@@ -220,8 +188,48 @@ export default function LandingPage() {
               View All Programs <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
+
+        </div>
+        <div className="mt-8 text-center">
+          <Link href="/programs" className="inline-flex items-center gap-2 bg-orange-500 text-white px-4 py-2 rounded-full font-medium hover:bg-orange-600 transition-colors">
+            View All Programs <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
+
+      {/* Features Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full border border-orange-100 mb-4">
+              <span className="text-orange-600 text-sm font-medium">Why Choose Us</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">A Modern Approach to <span className="text-orange-500">Islamic Education</span></h2>
+            <p className="mt-4 text-gray-500 max-w-2xl mx-auto">Experience a seamless learning journey with our comprehensive platform designed for seekers of knowledge</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { icon: BookOpen, title: 'Structured Programs', desc: 'Carefully curated curriculum following a clear path from basics to advanced studies', color: 'from-orange-500 to-amber-500' },
+              { icon: GraduationCap, title: 'Qualified Scholars', desc: 'Learn from scholars with ijazah and recognized credentials in their fields', color: 'from-blue-500 to-cyan-500' },
+              { icon: Play, title: 'Multi-format Lessons', desc: 'Access video lectures, audio recordings, and PDF materials at your own pace', color: 'from-green-500 to-emerald-500' },
+              { icon: FileTextIcon, title: 'Interactive Exams', desc: 'Test your knowledge with MCQ exams and receive instant results and feedback', color: 'from-purple-500 to-violet-500' },
+              { icon: Award, title: 'Certificates', desc: 'Earn verified certificates upon successful completion of programs and courses', color: 'from-pink-500 to-rose-500' },
+              { icon: Users, title: 'Community Learning', desc: 'Join classes with fellow students and benefit from group learning and discussion', color: 'from-indigo-500 to-blue-500' },
+            ].map((feature) => (
+              <div key={feature.title} className="group p-8 rounded-2xl border border-gray-100 hover:border-orange-100 hover:shadow-xl hover:shadow-orange-500/5 transition-all duration-300 bg-white card-hover">
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform`}>
+                  <feature.icon className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{feature.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
 
       {/* How it Works */}
       <section className="py-24 bg-white">
