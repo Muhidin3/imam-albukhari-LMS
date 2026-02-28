@@ -1,272 +1,253 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { User, Mail, Camera, Shield, Key, Save, Edit3, MapPin, Phone } from 'lucide-react';
-import { currentStudent } from '@/lib/data';
+import { currentStudent, programs, certificates, examResults } from '@/lib/data';
+import { User, Mail, Phone, MapPin, Calendar, Edit3, Save, X, Lock, BookOpen, CheckCircle, Award, Download, Star } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function ProfilePage() {
     const { t } = useLanguage();
     const [isEditing, setIsEditing] = useState(false);
-
-    // Form state
     const [formData, setFormData] = useState({
         name: currentStudent.name,
         email: currentStudent.email,
-        phone: '+1 234 567 8900', // Mock data
-        location: 'New York, USA', // Mock data
-        bio: 'Dedicated student of Islamic studies, eager to learn and grow in faith and knowledge.'
+        phone: '+251 91 234 5678',
+        location: 'Addis Ababa, Ethiopia',
+        bio: 'Seeking knowledge in Islamic studies.',
     });
 
-    const [isSaving, setIsSaving] = useState(false);
-    const [saved, setSaved] = useState(false);
+    const enrolledPrograms = programs.filter(p => currentStudent.enrolledPrograms.includes(p.id));
+    const studentCerts = certificates.slice(0, 1);
 
-    const handleSave = (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSaving(true);
-        // Mock save API call
-        setTimeout(() => {
-            setIsSaving(false);
-            setSaved(true);
-            setIsEditing(false);
-            setTimeout(() => setSaved(false), 3000);
-        }, 1000);
+    const handleChange = (field: string, value: string) => {
+        setFormData(prev => ({ ...prev, [field]: value }));
+    };
+
+    const handleSave = () => {
+        setIsEditing(false);
     };
 
     return (
-        <div className="max-w-6xl mx-auto space-y-6 text-gray-600">
-            <div className="flex justify-between items-center bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-                <div>
-                    <h1 className="text-2xl font-bold text-gray-900">{t('My Profile')}</h1>
-                    <p className="text-gray-500 mt-1">{t('Manage your personal information and preferences')}</p>
+        <div className="space-y-5 animate-fade-in-up">
+            {/* Profile Card */}
+            <div className="card-mobile overflow-hidden">
+                {/* Cover - desktop only */}
+                <div className="h-20 lg:h-28 bg-linear-to-r from-orange-400 to-red-500 relative hidden lg:block">
+                    <div className="absolute inset-0 islamic-pattern opacity-15"></div>
                 </div>
-                {!isEditing && (
-                    <button
-                        onClick={() => setIsEditing(true)}
-                        className="flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-600 rounded-xl hover:bg-orange-100 transition-colors font-medium"
-                    >
-                        <Edit3 className="w-4 h-4" />
-                        {t('Edit Profile')}
-                    </button>
-                )}
+
+                <div className="p-4 lg:px-6 lg:pb-6">
+                    <div className="flex items-center gap-4 lg:-mt-10">
+                        {/* Avatar */}
+                        <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-linear-to-br from-orange-500 to-red-500 flex items-center justify-center text-2xl lg:text-3xl border-4 border-white shadow-md shrink-0">
+                            {currentStudent.avatar}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <h1 className="text-lg lg:text-xl font-bold text-gray-900">{currentStudent.name}</h1>
+                                    <span className="text-xs text-orange-500 font-medium">{t('Student')}</span>
+                                </div>
+                                <button
+                                    onClick={() => setIsEditing(!isEditing)}
+                                    className="touch-target text-gray-400 hover:text-orange-500 transition-colors"
+                                >
+                                    <Edit3 className="w-5 h-5" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Contact info */}
+                    <div className="mt-4 space-y-2">
+                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                            <Mail className="w-4 h-4 text-gray-400" /> {currentStudent.email}
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                            <Phone className="w-4 h-4 text-gray-400" /> {formData.phone}
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                            <MapPin className="w-4 h-4 text-gray-400" /> {formData.location}
+                        </div>
+                    </div>
+
+                    {/* Quick stats */}
+                    <div className="flex gap-4 mt-4 pt-4 border-t border-gray-100">
+                        <div className="flex items-center gap-2">
+                            <Calendar className="w-4 h-4 text-gray-400" />
+                            <div>
+                                <p className="text-[10px] text-gray-400">{t('Joined')}</p>
+                                <p className="text-sm font-medium text-gray-700">{currentStudent.joinedDate}</p>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <BookOpen className="w-4 h-4 text-orange-400" />
+                            <div>
+                                <p className="text-[10px] text-gray-400">{t('Programs')}</p>
+                                <p className="text-sm font-medium text-gray-700">{enrolledPrograms.length}</p>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <CheckCircle className="w-4 h-4 text-green-400" />
+                            <div>
+                                <p className="text-[10px] text-gray-400">{t('Status')}</p>
+                                <p className="text-sm font-medium text-green-600 capitalize">{currentStudent.status}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* Left Column - Profile Card */}
-                <div className="space-y-6">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden"
-                    >
-                        <div className="h-32 bg-linear-to-r from-orange-400 to-red-500 relative">
-                            {/* Cover photo edit button */}
-                            {isEditing && (
-                                <button className="absolute top-4 right-4 p-2 bg-black/20 hover:bg-black/40 rounded-full text-white backdrop-blur-sm transition-colors cursor-pointer">
-                                    <Camera className="w-4 h-4" />
-                                </button>
-                            )}
+            {/* Edit Form */}
+            {isEditing && (
+                <div className="card-mobile p-4">
+                    <h2 className="text-base font-bold text-gray-900 mb-4">{t('Personal Information')}</h2>
+                    <div className="space-y-3">
+                        <div>
+                            <label className="block text-xs font-medium text-gray-500 mb-1">{t('Full Name')}</label>
+                            <input
+                                type="text"
+                                value={formData.name}
+                                onChange={e => handleChange('name', e.target.value)}
+                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-transparent"
+                            />
                         </div>
-                        <div className="px-6 pb-6 relative">
-                            <div className="relative w-24 h-24 -mt-12 rounded-full border-4 border-white bg-white mx-auto shadow-md">
-                                <div className="w-full h-full rounded-full bg-linear-to-br from-orange-500 to-red-500 flex items-center justify-center text-3xl">
-                                    {currentStudent.avatar}
-                                </div>
-                                {isEditing && (
-                                    <button className="absolute bottom-0 right-0 p-1.5 bg-gray-900 rounded-full text-white hover:bg-gray-800 transition-colors cursor-pointer">
-                                        <Camera className="w-4 h-4" />
-                                    </button>
-                                )}
-                            </div>
-
-                            <div className="text-center mt-4">
-                                <h2 className="text-xl font-bold text-gray-900">{formData.name}</h2>
-                                <p className="text-sm text-gray-500 mt-1">Student • {currentStudent.enrolledPrograms.length} Programs</p>
-                            </div>
-
-                            <div className="mt-8 space-y-4">
-                                <div className="flex items-center gap-3 text-sm">
-                                    <Mail className="w-4 h-4 text-gray-400" />
-                                    <span className="text-gray-600">{formData.email}</span>
-                                </div>
-                                <div className="flex items-center gap-3 text-sm">
-                                    <Phone className="w-4 h-4 text-gray-400" />
-                                    <span className="text-gray-600">{formData.phone}</span>
-                                </div>
-                                <div className="flex items-center gap-3 text-sm">
-                                    <MapPin className="w-4 h-4 text-gray-400" />
-                                    <span className="text-gray-600">{formData.location}</span>
-                                </div>
-                            </div>
+                        <div>
+                            <label className="block text-xs font-medium text-gray-500 mb-1">{t('Email')}</label>
+                            <input
+                                type="email"
+                                value={formData.email}
+                                onChange={e => handleChange('email', e.target.value)}
+                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-transparent"
+                            />
                         </div>
-                    </motion.div>
-
-                    {/* Quick Stats */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
-                        className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6"
-                    >
-                        <h3 className="font-semibold text-gray-900 mb-4">{t('Account Status')}</h3>
-                        <div className="space-y-4">
-                            <div className="flex justify-between items-center">
-                                <span className="text-sm text-gray-500">{t('Joined Date')}</span>
-                                <span className="text-sm font-medium text-gray-900">
-                                    {new Date(currentStudent.joinedDate).toLocaleDateString()}
-                                </span>
-                            </div>
-                            <div className="flex justify-between items-center">
-                                <span className="text-sm text-gray-500">{t('Status')}</span>
-                                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-200">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                                    {t('Active')}
-                                </span>
-                            </div>
+                        <div>
+                            <label className="block text-xs font-medium text-gray-500 mb-1">{t('Phone')}</label>
+                            <input
+                                type="tel"
+                                value={formData.phone}
+                                onChange={e => handleChange('phone', e.target.value)}
+                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-transparent"
+                            />
                         </div>
-                    </motion.div>
-                </div>
-
-                {/* Right Column - Forms */}
-                <div className="lg:col-span-2 space-y-6">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="bg-white rounded-2xl border border-gray-100 shadow-sm"
-                    >
-                        <div className="p-6 border-b border-gray-100 flex justify-between items-center">
-                            <div className="flex items-center gap-2">
-                                <User className="w-5 h-5 text-orange-500" />
-                                <h2 className="text-lg font-bold text-gray-900">{t('Personal Information')}</h2>
-                            </div>
-                            {saved && (
-                                <span className="text-sm text-green-600 flex items-center gap-1 bg-green-50 px-3 py-1 rounded-full">
-                                    <span className="w-1.5 h-1.5 bg-green-600 rounded-full"></span>
-                                    {t('Saved successfully')}
-                                </span>
-                            )}
+                        <div>
+                            <label className="block text-xs font-medium text-gray-500 mb-1">{t('Location')}</label>
+                            <input
+                                type="text"
+                                value={formData.location}
+                                onChange={e => handleChange('location', e.target.value)}
+                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-transparent"
+                            />
                         </div>
-
-                        <div className="p-6">
-                            <form onSubmit={handleSave} className="space-y-6">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium text-gray-700">{t('Full Name')}</label>
-                                        <input
-                                            type="text"
-                                            value={formData.name}
-                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                            disabled={!isEditing}
-                                            className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 disabled:bg-gray-50 disabled:text-gray-500 transition-colors"
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium text-gray-700">{t('Email Address')}</label>
-                                        <input
-                                            type="email"
-                                            value={formData.email}
-                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                            disabled={!isEditing}
-                                            className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 disabled:bg-gray-50 disabled:text-gray-500 transition-colors"
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium text-gray-700">{t('Phone Number')}</label>
-                                        <input
-                                            type="tel"
-                                            value={formData.phone}
-                                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                            disabled={!isEditing}
-                                            className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 disabled:bg-gray-50 disabled:text-gray-500 transition-colors"
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium text-gray-700">{t('Location')}</label>
-                                        <input
-                                            type="text"
-                                            value={formData.location}
-                                            onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                                            disabled={!isEditing}
-                                            className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 disabled:bg-gray-50 disabled:text-gray-500 transition-colors"
-                                        />
-                                    </div>
-                                    <div className="space-y-2 md:col-span-2">
-                                        <label className="text-sm font-medium text-gray-700">{t('Bio')}</label>
-                                        <textarea
-                                            value={formData.bio}
-                                            onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-                                            disabled={!isEditing}
-                                            rows={4}
-                                            className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 disabled:bg-gray-50 disabled:text-gray-500 transition-colors resize-none"
-                                        />
-                                    </div>
-                                </div>
-
-                                {isEditing && (
-                                    <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
-                                        <button
-                                            type="button"
-                                            onClick={() => setIsEditing(false)}
-                                            className="px-6 py-2 border border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 font-medium transition-colors cursor-pointer"
-                                        >
-                                            {t('Cancel')}
-                                        </button>
-                                        <button
-                                            type="submit"
-                                            disabled={isSaving}
-                                            className="px-6 py-2 bg-linear-to-r from-orange-500 to-red-500 text-white rounded-xl hover:from-orange-600 hover:to-red-600 font-medium shadow-md shadow-orange-500/20 disabled:opacity-70 disabled:cursor-not-allowed transition-all flex items-center gap-2 cursor-pointer"
-                                        >
-                                            {isSaving ? (
-                                                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                            ) : (
-                                                <Save className="w-4 h-4" />
-                                            )}
-                                            {t('Save Changes')}
-                                        </button>
-                                    </div>
-                                )}
-                            </form>
+                        <div>
+                            <label className="block text-xs font-medium text-gray-500 mb-1">{t('Bio')}</label>
+                            <textarea
+                                value={formData.bio}
+                                onChange={e => handleChange('bio', e.target.value)}
+                                rows={3}
+                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-transparent resize-none"
+                            />
                         </div>
-                    </motion.div>
+                    </div>
 
-                    {/* Security Section (Only visible when editing) */}
-                    {isEditing && (
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 }}
-                            className="bg-white rounded-2xl border border-gray-100 shadow-sm"
+                    {/* Action buttons */}
+                    <div className="flex flex-col sm:flex-row gap-2 mt-4">
+                        <button
+                            onClick={handleSave}
+                            className="flex-1 py-3 gradient-primary text-white rounded-xl text-sm font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
                         >
-                            <div className="p-6 border-b border-gray-100">
-                                <div className="flex items-center gap-2">
-                                    <Shield className="w-5 h-5 text-gray-900" />
-                                    <h2 className="text-lg font-bold text-gray-900">{t('Security Settings')}</h2>
-                                </div>
-                            </div>
-                            <div className="p-6">
-                                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between border border-gray-200 rounded-xl p-4">
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
-                                            <Key className="w-5 h-5 text-gray-600" />
-                                        </div>
-                                        <div>
-                                            <h3 className="font-semibold text-gray-900">{t('Password')}</h3>
-                                            <p className="text-sm text-gray-500 mt-1">
-                                                {t('Change your password to keep your account secure.')}
-                                            </p>
+                            <Save className="w-4 h-4" /> {t('Save Changes')}
+                        </button>
+                        <button
+                            onClick={() => setIsEditing(false)}
+                            className="flex-1 py-3 bg-gray-100 text-gray-600 rounded-xl text-sm font-medium hover:bg-gray-200 transition-colors flex items-center justify-center gap-2"
+                        >
+                            <X className="w-4 h-4" /> {t('Cancel')}
+                        </button>
+                    </div>
+
+                    {/* Security */}
+                    <div className="mt-4 pt-4 border-t border-gray-100">
+                        <button className="flex items-center gap-2 text-sm text-gray-500 hover:text-orange-500 transition-colors">
+                            <Lock className="w-4 h-4" /> {t('Change Password')}
+                        </button>
+                    </div>
+                </div>
+            )}
+
+            {/* Enrolled Programs Quick View */}
+            {!isEditing && (
+                <div className="card-mobile p-4">
+                    <h2 className="text-base font-bold text-gray-900 mb-3">{t('Enrolled Programs')}</h2>
+                    <div className="space-y-2">
+                        {enrolledPrograms.map(program => {
+                            const progress = currentStudent.progress[program.id] || 0;
+                            return (
+                                <div key={program.id} className="flex items-center gap-3 py-2">
+                                    <div className="w-9 h-9 rounded-lg gradient-primary flex items-center justify-center shrink-0">
+                                        <BookOpen className="w-4 h-4 text-white" />
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                        <p className="text-sm font-medium text-gray-900 truncate">{program.title}</p>
+                                        <div className="flex items-center gap-2 mt-1">
+                                            <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                                                <div className="progress-bar h-full" style={{ width: `${progress}%` }}></div>
+                                            </div>
+                                            <span className="text-[10px] font-bold text-orange-500">{progress}%</span>
                                         </div>
                                     </div>
-                                    <button className="px-4 py-2 border border-gray-200 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors w-full sm:w-auto shrink-0 cursor-pointer">
-                                        {t('Update Password')}
-                                    </button>
                                 </div>
-                            </div>
-                        </motion.div>
+                            );
+                        })}
+                    </div>
+                </div>
+            )}
+
+            {/* Certificates */}
+            {!isEditing && (
+                <div className="card-mobile p-4">
+                    <h2 className="text-base font-bold text-gray-900 mb-3">{t('Certificates')}</h2>
+                    {studentCerts.length > 0 ? (
+                        <div className="space-y-3">
+                            {studentCerts.map((cert) => (
+                                <div key={cert.id} className="rounded-xl overflow-hidden border border-gray-100">
+                                    <div className="relative p-4 bg-linear-to-br from-amber-50 to-orange-50 border-b border-orange-100">
+                                        <div className="absolute inset-0 islamic-pattern opacity-10"></div>
+                                        <div className="relative flex items-center gap-3">
+                                            <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center shrink-0">
+                                                <Award className="w-5 h-5 text-orange-500" />
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <p className="text-sm font-bold text-gray-900 truncate">{cert.programTitle}</p>
+                                                <div className="flex items-center gap-2 mt-0.5">
+                                                    <span className="text-[10px] text-gray-500">{cert.issueDate}</span>
+                                                    <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold badge-success">{cert.grade}</span>
+                                                    <div className="flex items-center gap-0.5">
+                                                        {[1, 2, 3, 4, 5].map(i => (
+                                                            <Star key={i} className="w-2.5 h-2.5 text-yellow-400 fill-yellow-400" />
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="p-3">
+                                        <button className="w-full py-2 gradient-primary text-white rounded-lg text-xs font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5">
+                                            <Download className="w-3.5 h-3.5" /> {t('Download PDF')}
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="text-center py-6">
+                            <Award className="w-10 h-10 text-gray-200 mx-auto mb-2" />
+                            <p className="text-sm text-gray-400">{t('No certificates yet')}</p>
+                            <p className="text-xs text-gray-400 mt-0.5">{t('Complete programs and pass exams to earn certificates')}</p>
+                        </div>
                     )}
                 </div>
-            </div>
+            )}
         </div>
     );
 }

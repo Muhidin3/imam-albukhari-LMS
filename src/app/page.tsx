@@ -8,7 +8,7 @@ import {
   Play, ChevronRight, Sparkles, BookMarked, Mic, FileText as FileTextIcon,
   CheckCircle2, Clock, Globe
 } from 'lucide-react';
-import { programs } from '@/lib/data';
+import { programs, teachers } from '@/lib/data';
 
 export default function LandingPage() {
   return (
@@ -17,59 +17,48 @@ export default function LandingPage() {
       <PublicNavbar />
 
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        {/* Background */}
-        {/* <div className="absolute inset-0 hero-gradient"></div>
-        <div className="absolute inset-0 islamic-pattern opacity-30"></div> */}
-
+      <section className="relative flex items-center overflow-hidden min-h-[50vh] sm:min-h-[70vh] lg:min-h-[90vh]">
         {/* Floating elements */}
-        <div className="absolute top-20 right-20 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-orange-400/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }}></div>
+        <div className="absolute top-20 right-20 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl animate-float hidden sm:block"></div>
+        <div className="absolute bottom-20 left-20 w-96 h-96 bg-orange-400/5 rounded-full blur-3xl animate-float hidden sm:block" style={{ animationDelay: '1.5s' }}></div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 bg-linear-to-bl from-orange-300 via-orange-100 to-white">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-8 sm:py-32 bg-linear-to-bl from-orange-300 via-orange-100 to-white w-full">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <div className="stagger-children">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100/80 rounded-full border border-orange-200 mb-6">
-                <Sparkles className="w-4 h-4 text-orange-500" />
-                <span className="text-orange-700 text-sm font-medium">Begin Your Journey of Knowledge</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-orange-100/80 rounded-full border border-orange-200 mb-4 sm:mb-6">
+                <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-orange-500" />
+                <span className="text-orange-700 text-xs sm:text-sm font-medium">Begin Your Journey of Knowledge</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
                 Seeking Knowledge is an{' '}
-                <span className="text-orange-500">
-                  Obligation
-                </span>{' '}
+                <span className="text-orange-500">Obligation</span>{' '}
                 Upon Every Muslim
               </h1>
 
-              <p className="mt-6 text-lg text-gray-600 leading-relaxed max-w-xl">
-                Join Imam Al-Bukhari Islamic Institute&apos;s comprehensive learning platform.
-                Access structured programs in Islamic sciences taught by qualified scholars from anywhere in the world.
-              </p>
-
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Link href="/register" className="gradient-primary text-white px-8 py-3.5 rounded-xl font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-orange-500/25 flex items-center gap-2 text-sm">
-                  Start Learning <ArrowRight className="w-4 h-4" />
+              <div className="mt-4 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
+                <Link href="/register" className="gradient-primary text-white px-5 py-2.5 sm:px-8 sm:py-3.5 rounded-xl font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-orange-500/25 flex items-center gap-2 text-xs sm:text-sm">
+                  Start Learning <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </Link>
-                <Link href="/programs" className="border border-orange-200 text-orange-700 px-8 py-3.5 rounded-xl font-semibold hover:bg-orange-50 transition-colors flex items-center gap-2 text-sm">
-                  <Play className="w-4 h-4" /> Explore Programs
+                <Link href="/programs" className="border border-orange-200 text-orange-700 px-5 py-2.5 sm:px-8 sm:py-3.5 rounded-xl font-semibold hover:bg-orange-50 transition-colors flex items-center gap-2 text-xs sm:text-sm">
+                  <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Explore Programs
                 </Link>
               </div>
 
-              <div className="mt-10 flex items-center gap-8">
+              <div className="mt-6 sm:mt-10 flex items-center gap-6 sm:gap-8">
                 <div>
-                  <div className="text-2xl font-bold text-gray-900">1200+</div>
-                  <div className="text-gray-400 text-sm">Students</div>
+                  <div className="text-lg sm:text-2xl font-bold text-gray-900">1200+</div>
+                  <div className="text-gray-400 text-xs sm:text-sm">Students</div>
                 </div>
-                <div className="w-px h-10 bg-white/10"></div>
+                <div className="w-px h-8 sm:h-10 bg-gray-200"></div>
                 <div>
-                  <div className="text-2xl font-bold text-gray-900">6</div>
-                  <div className="text-gray-400 text-sm">Programs</div>
+                  <div className="text-lg sm:text-2xl font-bold text-gray-900">6</div>
+                  <div className="text-gray-400 text-xs sm:text-sm">Programs</div>
                 </div>
-                <div className="w-px h-10 bg-white/10"></div>
+                <div className="w-px h-8 sm:h-10 bg-gray-200"></div>
                 <div>
-                  <div className="text-2xl font-bold text-gray-900">20+</div>
-                  <div className="text-gray-400 text-sm">Scholars</div>
+                  <div className="text-lg sm:text-2xl font-bold text-gray-900">20+</div>
+                  <div className="text-gray-400 text-xs sm:text-sm">Scholars</div>
                 </div>
               </div>
             </div>
@@ -121,80 +110,91 @@ export default function LandingPage() {
       </section>
 
       {/* Programs Preview */}
-      <section className="py-24 bg-gray-50 islamic-pattern">
+      <section className="py-10 sm:py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between mb-12">
+          <div className="flex items-center justify-between mb-6 sm:mb-12">
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full border border-orange-100 mb-4">
-                <BookOpen className="w-4 h-4 text-orange-600" />
-                <span className="text-orange-600 text-sm font-medium">Our Programs</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Explore Our <span className="text-orange-500">Programs</span></h2>
-              <p className="mt-3 text-gray-500">Choose from our range of structured Islamic education programs</p>
+              <h2 className="text-xl sm:text-3xl font-bold text-gray-900">Our <span className="text-orange-500">Programs</span></h2>
             </div>
-            <Link href="/programs" className="hidden md:flex items-center gap-2 text-orange-500 font-medium hover:text-orange-600 transition-colors">
-              View All <ArrowRight className="w-4 h-4" />
+            <Link href="/programs" className="flex items-center gap-1 text-orange-500 text-sm font-medium hover:text-orange-600 transition-colors">
+              View All <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-6">
             {programs.slice(0, 6).map((program) => (
-              <div key={program.id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden card-hover group">
-                {/* Card Header */}
-                <div className="h-48 gradient-primary relative overflow-hidden">
+              <Link key={program.id} href="/programs" className="bg-white rounded-xl sm:rounded-2xl border border-gray-100 overflow-hidden card-hover group">
+                {/* Compact gradient strip */}
+                <div className="h-20 sm:h-28 bg-gradient-to-br from-orange-400 to-orange-600 relative overflow-hidden">
                   <div className="absolute inset-0 islamic-pattern opacity-20"></div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${program.status === 'active' ? 'bg-orange-100/80 text-orange-700 border border-orange-200' :
-                      program.status === 'upcoming' ? 'bg-orange-50 text-orange-700 border border-orange-100' :
-                        'bg-orange-100/60 text-orange-700 border border-orange-200'
-                      }`}>{program.status === 'active' ? '● Active' : program.status === 'upcoming' ? '◐ Coming Soon' : '✓ Completed'}</span>
-                  </div>
-                  <div className="absolute top-4 right-4 text-3xl">
-                    📚
+                  <div className="absolute top-2 right-2 sm:top-3 sm:right-3 text-xl sm:text-2xl">📚</div>
+                  <div className="absolute bottom-2 left-2 sm:bottom-3 sm:left-3">
+                    <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-medium ${
+                      program.status === 'active' ? 'bg-white/90 text-green-600' :
+                      program.status === 'upcoming' ? 'bg-white/90 text-orange-600' :
+                      'bg-white/90 text-gray-600'
+                    }`}>
+                      {program.status === 'active' ? 'Active' : program.status === 'upcoming' ? 'Soon' : 'Done'}
+                    </span>
                   </div>
                 </div>
 
-                {/* Card Body */}
-                <div className="p-6">
-                  <div className="text-xs text-orange-500 font-semibold mb-2 uppercase tracking-wider">{program.level}</div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-orange-500 transition-colors">{program.title}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-4">{program.description}</p>
-
-                  <div className="flex items-center gap-4 text-sm text-gray-400 mb-4">
-                    <span className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5" /> {program.duration}
+                {/* Compact body */}
+                <div className="p-3 sm:p-4">
+                  <div className="text-[10px] sm:text-xs text-orange-500 font-semibold uppercase tracking-wider mb-1">{program.level}</div>
+                  <h3 className="text-xs sm:text-sm font-bold text-gray-900 group-hover:text-orange-500 transition-colors leading-tight line-clamp-2">{program.title}</h3>
+                  <div className="flex items-center gap-2 sm:gap-3 mt-2 text-[10px] sm:text-xs text-gray-400">
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3 h-3" /> {program.duration}
                     </span>
-                    <span className="flex items-center gap-1.5">
-                      <BookOpen className="w-3.5 h-3.5" /> {program.totalCourses} courses
+                    <span className="flex items-center gap-1">
+                      <Users className="w-3 h-3" /> {program.enrolledStudents}
                     </span>
-                  </div>
-
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-50">
-                    <div className="flex items-center gap-1.5">
-                      <Users className="w-3.5 h-3.5 text-gray-400" />
-                      <span className="text-sm text-gray-500">{program.enrolledStudents} students</span>
-                    </div>
-                    <Link href={`/programs`} className="text-orange-500 text-sm font-medium flex items-center gap-1 hover:text-orange-600 transition-colors">
-                      Learn More <ChevronRight className="w-4 h-4" />
-                    </Link>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="mt-8 text-center md:hidden">
-            <Link href="/programs" className="inline-flex items-center gap-2 text-orange-500 font-medium hover:text-orange-600 transition-colors">
-              View All Programs <ArrowRight className="w-4 h-4" />
-            </Link>
+      {/* Our Scholars Section */}
+      <section className="py-10 sm:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between mb-6 sm:mb-12">
+            <h2 className="text-xl sm:text-3xl font-bold text-gray-900">Our <span className="text-orange-500">Scholars</span></h2>
           </div>
 
-        </div>
-        <div className="mt-8 text-center">
-          <Link href="/programs" className="inline-flex items-center gap-2 bg-orange-500 text-white px-4 py-2 rounded-full font-medium hover:bg-orange-600 transition-colors">
-            View All Programs <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div className="flex gap-3 sm:gap-6 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory" style={{ scrollbarWidth: 'none' }}>
+            {teachers.map((teacher) => {
+              const teacherCourses = programs.flatMap(p =>
+                p.courses.filter(c => c.instructor === teacher.name).map(c => ({ ...c, programTitle: p.title }))
+              );
+              return (
+                <Link
+                  key={teacher.id}
+                  href={`/teachers/${teacher.id}`}
+                  className="flex-shrink-0 w-[160px] sm:w-[280px] snap-start group"
+                >
+                  <div className="bg-white rounded-xl sm:rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl hover:shadow-orange-500/5 transition-all duration-300 h-full">
+                    <div className="h-16 sm:h-24 bg-gradient-to-br from-orange-400 to-orange-600 relative overflow-hidden">
+                      <div className="absolute inset-0 islamic-pattern opacity-20"></div>
+                      <div className="absolute -bottom-6 sm:-bottom-8 left-1/2 -translate-x-1/2 w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full flex items-center justify-center text-2xl sm:text-3xl shadow-lg border-2 sm:border-4 border-white">
+                        {teacher.avatar}
+                      </div>
+                    </div>
+                    <div className="pt-8 sm:pt-10 pb-4 sm:pb-5 px-3 sm:px-5 text-center">
+                      <h3 className="text-xs sm:text-base font-bold text-gray-900 group-hover:text-orange-500 transition-colors leading-tight">{teacher.name}</h3>
+                      <p className="text-[10px] sm:text-xs text-orange-500 font-medium mt-0.5 sm:mt-1">{teacher.specialization}</p>
+                      <div className="mt-2 sm:mt-3 inline-flex items-center gap-1 text-[10px] sm:text-xs text-orange-500 font-medium group-hover:gap-2 transition-all">
+                        View Courses <ChevronRight className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </section>
 

@@ -2,14 +2,16 @@
 
 import { useState, useEffect } from 'react';
 import StudentSidebar from '@/components/student/StudentSidebar';
+import BottomTabBar from '@/components/student/BottomTabBar';
 import ChatBot from '@/components/ChatBot';
-import { Menu, Bell, Search } from 'lucide-react';
+import { Bell, Search } from 'lucide-react';
 import { LanguageProvider, useLanguage } from '@/context/LanguageContext';
 import LanguageToggle from '@/components/LanguageToggle';
+import Image from 'next/image';
+import Link from 'next/link';
 
 function StudentLayoutContent({ children }: { children: React.ReactNode }) {
     const [collapsed, setCollapsed] = useState(false);
-    const [mobileOpen, setMobileOpen] = useState(false);
     const [mounted, setMounted] = useState(false);
     const { t } = useLanguage();
 
@@ -26,29 +28,31 @@ function StudentLayoutContent({ children }: { children: React.ReactNode }) {
 
     return (
         <div className="min-h-screen bg-[#F8F9FC]">
-            {/* Mobile Header */}
-            <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-100 z-30 flex items-center px-4 justify-between">
-                <div className="flex items-center gap-3">
-                    <button
-                        onClick={() => setMobileOpen(true)}
-                        className="p-2 -ml-2 text-gray-600 hover:bg-gray-100 rounded-lg"
-                    >
-                        <Menu className="w-6 h-6" />
-                    </button>
-                    <span className="font-bold text-gray-900">{t('Student Portal')}</span>
+            {/* Mobile Top Bar */}
+            <div className="lg:hidden fixed top-0 left-0 right-0 h-14 bg-white/95 backdrop-blur-xl border-b border-gray-100 z-30 flex items-center px-4 justify-between">
+            <Link href="/" className="flex items-center gap-2">
+                <div className="flex items-center gap-2">
+                    <Image src="/logo.png" alt="Logo" width={28} height={28} className="w-7 h-7 rounded-md" />
+                    <span className="font-bold text-sm text-gray-900">Imam Al-Bukhari</span>
                 </div>
-                <LanguageToggle />
+            </Link>
+                <div className="flex items-center gap-1">
+                    <button className="touch-target relative text-gray-400 hover:text-gray-600">
+                        <Bell className="w-5 h-5" />
+                        <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+                    </button>
+                    <LanguageToggle />
+                </div>
             </div>
 
+            {/* Desktop Sidebar */}
             <StudentSidebar
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
-                mobileOpen={mobileOpen}
-                setMobileOpen={setMobileOpen}
             />
 
             <main
-                className={`min-h-screen transition-all duration-300 pt-16 lg:pt-0 ${collapsed ? 'lg:ml-[72px]' : 'lg:ml-64'
+                className={`min-h-screen transition-all duration-300 pt-14 lg:pt-0 pb-[70px] lg:pb-0 ${collapsed ? 'lg:ml-[72px]' : 'lg:ml-64'
                     }`}
             >
                 {/* Desktop Header */}
@@ -78,15 +82,10 @@ function StudentLayoutContent({ children }: { children: React.ReactNode }) {
                 </div>
             </main>
 
-            <ChatBot />
+            {/* Bottom Tab Bar - mobile only */}
+            <BottomTabBar />
 
-            {/* Mobile Overlay */}
-            {mobileOpen && (
-                <div
-                    className="fixed inset-0 bg-black/50 z-30 lg:hidden glass"
-                    onClick={() => setMobileOpen(false)}
-                />
-            )}
+            <ChatBot />
         </div>
     );
 }

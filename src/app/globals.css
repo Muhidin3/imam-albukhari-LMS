@@ -265,3 +265,84 @@ body {
   color: #E67E22;
   border: 1px solid rgba(230, 126, 34, 0.2);
 }
+
+/* ============================== */
+/* MOBILE-FIRST UTILITIES         */
+/* ============================== */
+
+.bottom-tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.pb-tab-bar {
+  padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+}
+
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.continue-hero-gradient {
+  background: linear-gradient(135deg, #D35400 0%, #E67E22 50%, #F39C12 100%);
+}
+
+.card-mobile {
+  background: #FFFFFF;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.tab-active-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 9999px;
+  background: #E67E22;
+}
+
+.scroll-snap-x {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.scroll-snap-x::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-snap-x > * {
+  scroll-snap-align: start;
+}
+
+.swipe-card {
+  flex: 0 0 80%;
+  max-width: 80%;
+}
+
+@media (min-width: 640px) {
+  .swipe-card {
+    flex: 0 0 45%;
+    max-width: 45%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .swipe-card {
+    flex: 0 0 30%;
+    max-width: 30%;
+  }
+}

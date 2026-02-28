@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-    LayoutDashboard, BookOpen, GraduationCap, PlayCircle, FileText,
-    Award, Bell, LogOut, ChevronLeft, ChevronRight, User, X
+    LayoutDashboard, BookOpen, PlayCircle,
+    Award, Bell, LogOut, ChevronLeft, ChevronRight, User
 } from 'lucide-react';
 import { currentStudent } from '@/lib/data';
 import { useLanguage } from '@/context/LanguageContext';
@@ -13,11 +13,9 @@ import Image from 'next/image';
 interface StudentSidebarProps {
     collapsed: boolean;
     setCollapsed: (v: boolean) => void;
-    mobileOpen: boolean;
-    setMobileOpen: (v: boolean) => void;
 }
 
-export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, setMobileOpen }: StudentSidebarProps) {
+export default function StudentSidebar({ collapsed, setCollapsed }: StudentSidebarProps) {
     const pathname = usePathname();
     const { t } = useLanguage();
 
@@ -33,11 +31,9 @@ export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, se
     return (
         <aside
             className={`
-                fixed top-0 left-0 h-full bg-white/60 backdrop-blur-2xl border-r border-white/5  text-black
-                transition-all duration-300 z-40 flex flex-col 
-                ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+                fixed top-0 left-0 h-full bg-white/60 backdrop-blur-2xl border-r border-white/5 text-black
+                transition-all duration-300 z-40 hidden lg:flex flex-col
                 ${collapsed ? 'lg:w-[72px]' : 'lg:w-64'}
-                w-64
             `}
         >
             {/* Logo */}
@@ -45,10 +41,9 @@ export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, se
                 {!collapsed && (
                     <div className="flex items-center gap-2">
                         <div className="w-8 h-8 rounded-lg flex items-center justify-center">
-                            {/* <BookOpen className="w-4 h-4 text-white" /> */}
                             <Image src="/logo.png" alt="Logo" className="w-10 h-10" width={1000} height={1000} />
                         </div>
-                        <div className="lg:block">
+                        <div>
                             <span className="text-gray-700 font-bold text-sm block">{t('Student Portal')}</span>
                             <span className="text-orange-400 text-[9px] -mt-0.5 block tracking-wider uppercase">Imam Al-Bukhari</span>
                         </div>
@@ -60,20 +55,11 @@ export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, se
                     </div>
                 )}
 
-                {/* Desktop Collapse Toggle */}
                 <button
                     onClick={() => setCollapsed(!collapsed)}
-                    className="text-gray-500 hover:text-black transition-colors hidden lg:block"
+                    className="text-gray-500 hover:text-black transition-colors"
                 >
                     {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
-                </button>
-
-                {/* Mobile Close Button */}
-                <button
-                    onClick={() => setMobileOpen(false)}
-                    className="text-gray-400 hover:text-black lg:hidden"
-                >
-                    <X className="w-5 h-5" />
                 </button>
             </div>
 
@@ -88,7 +74,6 @@ export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, se
                         <Link
                             key={item.href}
                             href={item.href}
-                            onClick={() => setMobileOpen(false)}
                             className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${isActive
                                 ? 'bg-orange-500/10 text-orange-400'
                                 : 'text-gray-400 hover:text-orange-400 hover:bg-white/5'
@@ -96,11 +81,11 @@ export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, se
                             title={collapsed ? item.label : undefined}
                         >
                             <item.icon className={`w-5 h-5 shrink-0 ${isActive ? 'text-orange-400' : ''}`} />
-                            <span className={`${collapsed ? 'hidden lg:hidden' : 'block'} ${!collapsed ? 'lg:block' : ''}`}>
+                            <span className={collapsed ? 'hidden' : 'block'}>
                                 {item.label}
                             </span>
                             {isActive && !collapsed && (
-                                <div className="ml-auto w-1.5 h-1.5 rounded-full bg-orange-400 hidden lg:block"></div>
+                                <div className="ml-auto w-1.5 h-1.5 rounded-full bg-orange-400"></div>
                             )}
                         </Link>
                     );
@@ -114,25 +99,18 @@ export default function StudentSidebar({ collapsed, setCollapsed, mobileOpen, se
                         {currentStudent.avatar || <User className="w-4 h-4" />}
                     </div>
                     {!collapsed && (
-                        <div className="hidden lg:block flex-1 min-w-0">
-                            <p className="text-white text-sm font-medium truncate">{currentStudent.name}</p>
+                        <div className="flex-1 min-w-0">
+                            <p className="text-gray-700 text-sm font-medium truncate">{currentStudent.name}</p>
                             <p className="text-gray-500 text-xs truncate">{currentStudent.email}</p>
                         </div>
                     )}
-
-                    {/* Show on mobile regardless of collapse state */}
-                    <div className="lg:hidden flex-1 min-w-0">
-                        <p className="text-white text-sm font-medium truncate">{currentStudent.name}</p>
-                        <p className="text-gray-500 text-xs truncate">{currentStudent.email}</p>
-                    </div>
                 </Link>
                 <Link
                     href="/"
                     className={`flex items-center gap-3 px-3 py-2.5 mt-1 rounded-xl text-gray-500 hover:text-red-400 hover:bg-red-500/5 text-sm transition-all ${collapsed ? 'justify-center' : ''}`}
                 >
                     <LogOut className="w-4 h-4" />
-                    {!collapsed && <span className="hidden lg:block">Sign Out</span>}
-                    <span className="lg:hidden">Sign Out</span>
+                    {!collapsed && <span>Sign Out</span>}
                 </Link>
             </div>
         </aside>

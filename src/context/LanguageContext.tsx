@@ -106,19 +106,88 @@ export const translations: Record<string, Record<Language, string>> = {
     'Welcome back': { en: 'Welcome back', am: 'እንኳን ደህና መጡ' },
     'Admin Panel': { en: 'Admin Panel', am: 'የአስተዳዳሪ ፓነል' },
     'Student Portal': { en: 'Student Portal', am: 'የተማሪ ፓርታል' },
+    'Continue Learning': { en: 'Continue Learning', am: 'መማርዎን ይቀጥሉ' },
+    'Continue Lesson': { en: 'Continue Lesson', am: 'ትምህርቱን ቀጥል' },
+    'Continue your learning journey': { en: 'Continue your learning journey', am: 'የመማር ጉዞዎን ይቀጥሉ' },
+    'See All': { en: 'See All', am: 'ሁሉንም ይመልከቱ' },
+    'Read more': { en: 'Read more', am: 'ተጨማሪ ያንብቡ' },
+    'Show less': { en: 'Show less', am: 'ያነሰ ያሳዩ' },
+    'Contents': { en: 'Contents', am: 'ይዘቶች' },
+    'More': { en: 'More', am: 'ተጨማሪ' },
+    'Start Learning': { en: 'Start Learning', am: 'መማር ይጀምሩ' },
+    'Streak': { en: 'Streak', am: 'ተከታታይ' },
+    'Recent Scores': { en: 'Recent Scores', am: 'የቅርብ ውጤቶች' },
+    'Mark Complete': { en: 'Mark Complete', am: 'ያጠናቅቁ' },
+    'Prev': { en: 'Prev', am: 'ቀዳሚ' },
+    'View your enrolled programs and progress': { en: 'View your enrolled programs and progress', am: 'የተመዘገቡበትን ፕሮግራሞች እና ሂደት ይመልከቱ' },
+    'Stay updated with the latest news': { en: 'Stay updated with the latest news', am: 'በዘመናዊ ዜናዎች ይከታተሉ' },
+    'View and download your earned certificates': { en: 'View and download your earned certificates', am: 'የተገኙ ሰርቲፊኬቶችን ይመልከቱ እና ያውርዱ' },
+    'Select a program to start learning': { en: 'Select a program to start learning', am: 'ለመማር ፕሮግራም ይምረጡ' },
+    'Avg': { en: 'Avg', am: 'አማካይ' },
+    'active': { en: 'active', am: 'ንቁ' },
+    'High': { en: 'High', am: 'ከፍተኛ' },
+    'Medium': { en: 'Medium', am: 'መካከለኛ' },
+    'Low': { en: 'Low', am: 'ዝቅተኛ' },
+    'Earned': { en: 'Earned', am: 'የተገኘ' },
+    'Exams Passed': { en: 'Exams Passed', am: 'ያለፉ ፈተናዎች' },
+    'Earned Certificates': { en: 'Earned Certificates', am: 'የተገኙ ሰርቲፊኬቶች' },
+    'No certificates yet': { en: 'No certificates yet', am: 'ገና ሰርቲፊኬት የለም' },
+    'Complete programs and pass exams to earn certificates': { en: 'Complete programs and pass exams to earn certificates', am: 'ሰርቲፊኬቶችን ለማግኘት ፕሮግራሞችን ያጠናቅቁ' },
+    'How to Earn a Certificate': { en: 'How to Earn a Certificate', am: 'ሰርቲፊኬት እንዴት ማግኘት ይቻላል' },
+    'Complete Chapters': { en: 'Complete Chapters', am: 'ምዕራፎችን ያጠናቅቁ' },
+    'Finish all chapters in the program': { en: 'Finish all chapters in the program', am: 'በፕሮግራሙ ውስጥ ሁሉንም ምዕራፎች ያጠናቅቁ' },
+    'Pass the Exam': { en: 'Pass the Exam', am: 'ፈተናውን ያልፉ' },
+    'Score above the passing threshold': { en: 'Score above the passing threshold', am: 'ከማለፊያ ውጤት በላይ ያስመዝግቡ' },
+    'Your certificate will be auto-generated': { en: 'Your certificate will be auto-generated', am: 'ሰርቲፊኬትዎ በራስ ሰር ይፈጠራል' },
+    'Download PDF': { en: 'Download PDF', am: 'PDF አውርድ' },
+    'Joined': { en: 'Joined', am: 'ተቀላቀሉ' },
+    'Personal Information': { en: 'Personal Information', am: 'የግል መረጃ' },
+    'Full Name': { en: 'Full Name', am: 'ሙሉ ስም' },
+    'Save Changes': { en: 'Save Changes', am: 'ለውጦችን ያስቀምጡ' },
+    'Change Password': { en: 'Change Password', am: 'የይለፍ ቃል ቀይር' },
+    'Enrolled Programs': { en: 'Enrolled Programs', am: 'የተመዘገቡ ፕሮግራሞች' },
+    'Final Exam': { en: 'Final Exam', am: 'የመጨረሻ ፈተና' },
+    'Ready to take!': { en: 'Ready to take!', am: 'ለመውሰድ ዝግጁ!' },
+    'Available': { en: 'Available', am: 'ይገኛል' },
+    'Locked': { en: 'Locked', am: 'ተቆልፏል' },
+    'No chapters available for this program yet.': { en: 'No chapters available for this program yet.', am: 'ለዚህ ፕሮግራም ገና ምዕራፎች የሉም።' },
+    'Explore Programs': { en: 'Explore Programs', am: 'ፕሮግራሞችን ያስሱ' },
+    'Discover new programs to expand your knowledge': { en: 'Discover new programs to expand your knowledge', am: 'እውቀትዎን ለማስፋት አዳዲስ ፕሮግራሞችን ያግኙ' },
+    'Upcoming': { en: 'Upcoming', am: 'መጪ' },
+    'Chapters': { en: 'Chapters', am: 'ምዕራፎች' },
+    'Progress': { en: 'Progress', am: 'ሂደት' },
+    'No Programs': { en: 'No Programs', am: 'ፕሮግራሞች የሉም' },
+    'Lessons': { en: 'Lessons', am: 'ትምህርቶች' },
+    'Tests': { en: 'Tests', am: 'ፈተናዎች' },
+    'Location': { en: 'Location', am: 'አድራሻ' },
+    'Bio': { en: 'Bio', am: 'ስለራስ' },
+    'No announcements found': { en: 'No announcements found', am: 'ማስታወቂያዎች አልተገኙም' },
+    'No announcements for this program': { en: 'No announcements for this program.', am: 'ለዚህ ፕሮግራም ማስታወቂያ የለም።' },
+    'No tests available yet': { en: 'No tests available yet.', am: 'ገና ፈተናዎች የሉም።' },
+    'No lessons available yet': { en: 'No lessons available yet.', am: 'ገና ትምህርቶች የሉም።' },
+    'Not enrolled yet': { en: 'You are not enrolled in any programs yet.', am: 'ገና በምንም ፕሮግራም አልተመዘገቡም።' },
+    'No enrolled programs yet': { en: "You don't have any enrolled programs yet.", am: 'ገና የተመዘገቡበት ፕሮግራም የለም።' },
+    'Program not found': { en: 'Program not found', am: 'ፕሮግራም አልተገኘም' },
+    'Certificate of Completion': { en: 'Certificate of Completion', am: 'የማጠናቀቂያ ሰርቲፊኬት' },
+    'credits': { en: 'credits', am: 'ክሬዲቶች' },
+    'done': { en: 'done', am: 'ተጠናቋል' },
+    'lessons': { en: 'lessons', am: 'ትምህርቶች' },
+    'chapters': { en: 'chapters', am: 'ምዕራፎች' },
+    'PDF Viewer': { en: 'PDF Viewer', am: 'PDF መመልከቻ' },
+    'Assalamu Alaikum': { en: 'Assalamu Alaikum', am: 'አሰላሙ ዓለይኩም' },
 };
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
     const [language, setLanguage] = useState<Language>('en');
 
-    // Retrieve language from localStorage on mount
+    // Retrieve language from localStorage on mount only
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         const storedLang = localStorage.getItem('language') as Language;
-        if (storedLang && storedLang !== language) {
-            // eslint-disable-next-line react-hooks/set-state-in-effect
+        if (storedLang && (storedLang === 'en' || storedLang === 'am')) {
             setLanguage(storedLang);
         }
-    }, [language]);
+    }, []);
 
     // Save language to localStorage on change
     useEffect(() => {

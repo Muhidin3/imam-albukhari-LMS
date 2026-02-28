@@ -505,6 +505,9 @@ export const teachers: Teacher[] = [
   { id: 'tea-1', name: 'Sheikh Ahmad Al-Farsi', email: 'ahmad.farsi@example.com', avatar: '👨‍🏫', specialization: 'Aqeedah & Fiqh', assignedClasses: ['class-1'], joinedDate: '2024-01-10', status: 'active' },
   { id: 'tea-2', name: 'Dr. Muhammad Al-Azhari', email: 'muhammad.azhari@example.com', avatar: '👨‍🏫', specialization: 'Hadith Sciences', assignedClasses: ['class-2'], joinedDate: '2024-03-15', status: 'active' },
   { id: 'tea-3', name: 'Qari Abdullah Mansoor', email: 'abdullah.mansoor@example.com', avatar: '👨‍🏫', specialization: 'Quran & Tajweed', assignedClasses: ['class-3'], joinedDate: '2024-05-20', status: 'active' },
+  { id: 'tea-4', name: 'Sheikh Ibrahim Al-Bakri', email: 'ibrahim.bakri@example.com', avatar: '👨‍🏫', specialization: 'Fiqh & Usul', assignedClasses: [], joinedDate: '2024-02-01', status: 'active' },
+  { id: 'tea-5', name: 'Dr. Fatimah Al-Zahra', email: 'fatimah.zahra@example.com', avatar: '👩‍🏫', specialization: 'Seerah & Islamic History', assignedClasses: [], joinedDate: '2024-04-10', status: 'active' },
+  { id: 'tea-6', name: 'Ustadha Maryam Hassan', email: 'maryam.hassan@example.com', avatar: '👩‍🏫', specialization: 'Arabic Language', assignedClasses: [], joinedDate: '2024-06-15', status: 'active' },
 ];
 
 // ==============================

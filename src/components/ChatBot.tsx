@@ -70,7 +70,7 @@ export default function ChatBot() {
             {/* Chat Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full gradient-primary shadow-lg shadow-orange-500/30 flex items-center justify-center transition-all duration-300 hover:scale-110 ${isOpen ? 'rotate-0' : 'animate-pulse-glow'
+                className={`fixed bottom-20 right-4 lg:bottom-6 lg:right-6 z-50 w-14 h-14 rounded-full gradient-primary shadow-lg shadow-orange-500/30 flex items-center justify-center transition-all duration-300 hover:scale-110 ${isOpen ? 'rotate-0' : 'animate-pulse-glow'
                     }`}
                 id="chat-bot-toggle"
             >
@@ -79,7 +79,7 @@ export default function ChatBot() {
 
             {/* Chat Window */}
             {isOpen && (
-                <div className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-3rem)] bg-white rounded-2xl shadow-2xl shadow-black/20 border border-gray-100 overflow-hidden animate-fade-in-up">
+                <div className="fixed bottom-36 right-4 lg:bottom-24 lg:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[360px] max-w-[360px] bg-white rounded-2xl shadow-2xl shadow-black/20 border border-gray-100 overflow-hidden animate-fade-in-up">
                     {/* Header */}
                     <div className="gradient-primary px-5 py-4">
                         <div className="flex items-center gap-3">
