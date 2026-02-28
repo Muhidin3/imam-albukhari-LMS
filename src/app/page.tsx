@@ -13,16 +13,16 @@ import { programs, teachers } from '@/lib/data';
 export default function LandingPage() {
   return (
     // <div className="min-h-screen bg-[#FAFAF8]">
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen islamic-pattern bg-white">
       <PublicNavbar />
 
       {/* Hero Section */}
       <section className="relative flex items-center overflow-hidden min-h-[50vh] sm:min-h-[70vh] lg:min-h-[90vh]">
         {/* Floating elements */}
-        <div className="absolute top-20 right-20 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl animate-float hidden sm:block"></div>
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-orange-400/5 rounded-full blur-3xl animate-float hidden sm:block" style={{ animationDelay: '1.5s' }}></div>
+        {/* <div className="absolute top-20 right-20 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl animate-float hidden sm:block"></div>
+        <div className="absolute bottom-20 left-20 w-96 h-96 bg-orange-400/5 rounded-full blur-3xl animate-float hidden sm:block" style={{ animationDelay: '1.5s' }}></div> */}
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-8 sm:py-32 bg-linear-to-bl from-orange-300 via-orange-100 to-white w-full">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-8 sm:py-32 bg-linear-to-b from-white via-orange-300 to-white w-full">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <div className="stagger-children">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-orange-100/80 rounded-full border border-orange-200 mb-4 sm:mb-6">
@@ -45,7 +45,7 @@ export default function LandingPage() {
                 </Link>
               </div>
 
-              <div className="mt-6 sm:mt-10 flex items-center gap-6 sm:gap-8">
+              {/* <div className="mt-6 sm:mt-10 flex items-center gap-6 sm:gap-8">
                 <div>
                   <div className="text-lg sm:text-2xl font-bold text-gray-900">1200+</div>
                   <div className="text-gray-400 text-xs sm:text-sm">Students</div>
@@ -60,7 +60,7 @@ export default function LandingPage() {
                   <div className="text-lg sm:text-2xl font-bold text-gray-900">20+</div>
                   <div className="text-gray-400 text-xs sm:text-sm">Scholars</div>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* Hero Card */}
@@ -110,7 +110,7 @@ export default function LandingPage() {
       </section>
 
       {/* Programs Preview */}
-      <section className="py-10 sm:py-24 bg-gray-50">
+      <section className="py-10 sm:py-24 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-6 sm:mb-12">
             <div>
@@ -159,7 +159,7 @@ export default function LandingPage() {
       </section>
 
       {/* Our Scholars Section */}
-      <section className="py-10 sm:py-24 bg-white">
+      <section className="py-10 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-6 sm:mb-12">
             <h2 className="text-xl sm:text-3xl font-bold text-gray-900">Our <span className="text-orange-500">Scholars</span></h2>
@@ -199,7 +199,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 bg-white">
+      <section className="py-24 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full border border-orange-100 mb-4">
@@ -233,7 +233,7 @@ export default function LandingPage() {
 
 
       {/* How it Works */}
-      <section className="py-24 bg-white">
+      <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">How It <span className="text-orange-500">Works</span></h2>
@@ -261,8 +261,8 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-50 via-orange-100 to-orange-200"></div>
+      <section className="py-24 relative overflow-hidde">
+        <div className="absolute inset-0 bg-linear-to-t from-orange-50 via-orange-100 to-white"></div>
         <div className="absolute inset-0 islamic-pattern opacity-20"></div>
         <div className="relative max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Ready to Begin Your <span className="text-orange-500">Journey?</span></h2>

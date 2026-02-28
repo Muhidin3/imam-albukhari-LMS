@@ -101,7 +101,6 @@ export default function Footer() {
                         © 2026 Imam Al-Bukhari Islamic Institute. All rights reserved.
                     </p>
                     <p className="text-xs text-gray-600 font-arabic">
-                        بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
                     </p>
                 </div>
             </div>

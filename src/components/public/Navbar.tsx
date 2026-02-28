@@ -19,9 +19,9 @@ export default function PublicNavbar() {
                             {/* <BookOpen className="w-5 h-5 text-white" /> */}
                             <Image src="/logo.png" alt="Logo" width={100} height={100} />
                         </div>
-                        <div className="hidden sm:block">
-                            <span className="text-orange-950 font-bold text-lg tracking-tight">Imam Al-Bukhari</span>
-                            <span className="block text-orange-900 text-[10px] -mt-1 font-medium tracking-widest uppercase">Islamic Institute</span>
+                        <div>
+                            <span className="text-orange-950 font-bold text-sm sm:text-lg tracking-tight">Imam Al-Bukhari</span>
+                            <span className="block text-orange-900 text-[9px] sm:text-[10px] -mt-1 font-medium tracking-widest uppercase">Islamic Institute</span>
                         </div>
                     </Link>
 
@@ -76,26 +76,26 @@ export default function PublicNavbar() {
 
                     {/* Mobile menu button */}
                     <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors">
-                        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                        {isOpen ? <X className="w-6 h-6 text-orange-950" /> : <Menu className="w-6 h-6 text-orange-950" />}
                     </button>
                 </div>
             </div>
 
             {/* Mobile menu */}
             {isOpen && (
-                <div className="md:hidden bg-[#3A1700] border-t border-white/10 animate-fade-in-up">
+                <div className="md:hidden bg-white/50  rounded-xl animate-fade-in-up text-orange-950">
                     <div className="px-4 py-4 space-y-1">
-                        <Link href="/" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-gray-300 hover:text-orange-400 hover:bg-white/5 rounded-lg transition-colors text-sm font-medium">
+                        <Link href="/" onClick={() => setIsOpen(false)} className="block px-4 py-3  hover:text-orange-400 hover:bg-white/5 rounded-lg transition-colors text-sm font-medium">
                             Home
                         </Link>
-                        <Link href="/programs" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-gray-300 hover:text-orange-400 hover:bg-white/5 rounded-lg transition-colors text-sm font-medium">
+                        <Link href="/programs" onClick={() => setIsOpen(false)} className="block px-4 py-3  hover:text-orange-400 hover:bg-white/5 rounded-lg transition-colors text-sm font-medium">
                             Programs
                         </Link>
-                        <Link href="/about" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-gray-300 hover:text-orange-400 hover:bg-white/5 rounded-lg transition-colors text-sm font-medium">
+                        <Link href="/about" onClick={() => setIsOpen(false)} className="block px-4 py-3  hover:text-orange-400 hover:bg-white/5 rounded-lg transition-colors text-sm font-medium">
                             About
                         </Link>
                         <div className="pt-3 border-t border-white/10 flex flex-col gap-2">
-                            <Link href="/login" onClick={() => setIsOpen(false)} className="block text-center px-4 py-3 text-gray-300 border border-white/20 rounded-xl text-sm font-medium">
+                            <Link href="/login" onClick={() => setIsOpen(false)} className="block text-center px-4 py-3  border border-white/20 rounded-xl text-sm font-medium">
                                 Sign In
                             </Link>
                             <Link href="/register" onClick={() => setIsOpen(false)} className="block text-center px-4 py-3 gradient-primary text-white rounded-xl text-sm font-semibold">
